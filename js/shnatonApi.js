@@ -36,7 +36,7 @@ function Faculty(id, name) {
 	//fetch list of relavent chugim
 	this.fetchChugim = function(callback) {
 		getJSON("GetChugimByFaculty", { "facultyId" : this.id }, function(obj) {
-			var arr;
+			var arr = [];
 			for (var i = 0; i < obj.length; i++) {
 				arr[i] = new Chug(obj[i].id, obj[i].name, new Faculty(this.id, this.name));
 			}
