@@ -36,7 +36,7 @@ function Faculty(id, name) {
 	//fetch list of relavent chugim
 	this.fetchChugim = function(callback) {
 		var _this = this;
-		getJSON("GetChugimByFaculty", { "facultyId" : this.id }, function(obj) {
+		getJSON("GetChugimByFaculty", { "facultyId": this.id }, function(obj) {
 			for (var i = 0; i < obj.length; i++) {
 				_this.chugim[i] = new Chug(obj[i].id, obj[i].name, new Faculty(obj[i].hogFaculty.id, obj[i].hogFaculty.name));
 			}
@@ -57,21 +57,18 @@ function Chug(id, name, faculty) {
 	
 	//fetch list of relavent maslulim
 	this.fetchMaslulim = function(callback) {
-		var xhr = $.getJSON(webService + "/ ...", this.id, function(data, status) {
-			if (status == "success") {
-				var obj = $.parseJSON(data);
-				for (var i = 0; i < obj.length; i++)
-					this.maslulim[i] = new Maslul(
-						obj[i].id,
-						obj[i].name,
-						obj[i].degreeType, //parse the type to text on client?
-						obj[i].type,
-						obj[i].rating,
-						obj[i].years //years is taken from Agadim from year_toar per maslul_id
-					);
+		var _this = this;
+		getJSON("GetMaslulimByChug", { "chugId": this.id }, function(obj) {
+			for (var i = 0; i < obj.length; i++) {
+				_this.maslulim[i] = new Maslul(
+					obj[i].id,
+					obj[i].name,
+					obj[i].degreeType,
+					obj[i].type
+				);
 			}
+			callback();
 		});
-		xhr.done(callback);
 	}
 	
 	this.getId = function() { return this.id; }
@@ -79,105 +76,55 @@ function Chug(id, name, faculty) {
 	this.getMaslulim = function() { return this.maslulim; }
 }
 
-function Maslul(id, name, degreeType, type, rating, years) {
+function Maslul(id, name, degreeType, type) {
 	this.id = id;
 	this.name = name;
 	this.degreeType = degreeType;
 	this.type = type;
-	this.rating = rating;
-	this.years = years;
 	this.agadim = []; //list of agadim object
 	this.courses = []; //list of course object
 	
 	//fetch entire list of agadim relavent to this maslul
 	this.fetchAgadim = function(callback) {
-		var xhr = $.getJSON(webService + "/ ...", this.id, function(data, status) {
-			if (status == "success") {
-				var obj = $.parseJSON(stripXML(data));
-				for (var i = 0; i < obj.length; i++)
-					this.agadim[i] = new Eged(
-						obj[i].id,
-						obj[i].year_toar,
-						obj[i].type,
-						obj[i].note
-					);
+		var _this = this;
+		getJSON("GetAggadimByMaslul", { "maslulId": this.id }, function(obj) {
+			for (var i = 0; i < obj.length; i++) {
+				_this.agadim[i] = new Eged(
+					obj[i].id,
+					obj[i].yearToar,
+					obj[i].type,
+					obj[i].note //also recieving max/min/exact courses/naz
+				);
 			}
+			callback();
 		});
-		xhr.done(callback);
 	}
-	
+	this.fetchCourses = function(callback) {
+		var _this = this;
+		getJSON("GetCourseByMaslul", { "maslulId": this.id }, function(obj) {
+			for (var i = 0; i < obj.length; i++) {
+				var divisor, semester = courseSemester.replace("\u0027", "'");
+				if (semester == "קורס שנתי") divisor = 28;
+				else if (semester == "א'" || semester == "ב'") divisor = 14;
+				else divisor = 1; // summer semester
+				_this.courses[i] = new Course(
+					obj[i].id,
+					obj[i].name,
+					obj[i].nz,
+					semester,
+					obj[i].totalHours / divisor,
+					obj[i].type,
+					obj[i].exam,
+					obj[i].aggadim //reparse egged 
+				);
+			}
+			callback();
+		});
+	}
 	this.getId = function() { return this.id; }
 	this.getName = function() { return this.name; }
 	this.getMaslulType = function() { return this.type; }
-	this.getMaslulTypeName = function() {
-		switch (this.type) {
-			case 1:
-				return 'חד-חוגי';
-			case 2:
-				return 'חד-חוגי מורחב';
-			case 3:
-				return 'רב-חוגי - דו-חוגי ויותר';
-			case 4:
-				return 'חטיבה';
-			case 5:
-				return 'לימודים משלימים';
-			case 6:
-				return 'אבני פינה - ניסוי';
-			case 7:
-				return 'חד-חוגי במסלול דו-חוגי';
-			case 8:
-				return 'התמחות';
-			case 9:
-				return 'דו-חוגי - חוג ראשי';
-			case 10:
-				return 'דו-חוגי  - חוג משני';
-			case 11:
-				return 'משלים למחקר';
-			case 12:
-				return 'מדור';
-			case 13:
-				return 'אבני פינה - רוח';
-			case 14:
-				return 'אבני פינה - חברה';
-			case 15:
-				return 'חטיבה משולבת';
-			default:
-				return "";
-		}
-	}
 	this.getDegreeType = function() { return this.degreeType; }
-	this.getDegreeTypeName = function() {
-		switch (this.degreeType) {
-			case 1:
-				return 'תואר בוגר';
-			case 2:
-				return 'לימודי תעודה';
-			case 3:
-				return 'שנת השלמה';
-			case 4:
-				return 'תואר מוסמך';
-			case 5:
-				return 'דוקטור לפילוסופיה';
-			case 6:
-				return 'דוקטור לוטרינריה';
-			case 7:
-				return 'דוקטור לרפואת שיניים';
-			case 9:
-				return 'תוכניות מיוחדות';
-			case 10:
-				return 'דוקטור לרפואה';
-			case 11:
-				return 'דוקטור לרוקחות קלינית';
-			case 12:
-				return 'משלים למחקר';
-			case 18:
-				return 'מכינה';
-			default:
-				return "";
-		}
-	}
-	this.getYears = function() { return this.years; }
-	this.getRating = function() { return this.rating; }
 	this.getCourses = function() { return this.courses; }
 	this.getAgadim = function() { return this.agadim; }
 }
@@ -192,23 +139,27 @@ function Eged(id, year, type, notes) {
 	this.maslulim = []; //list of maslul object
 	
 	//fetch list of courses based on eged id
-	this.fetchCourses = function() {
-		var xhr = $.getJSON(webService + "/ ...", this.id, function(data, status) {
-			if (status == "success") {
-				var obj = $.parseJSON(data);
-				for (var i = 0; i < obj.length; i++)
-					this.agadim[i] = new Course(
-						obj[i].id,
-						obj[i].name,
-						obj[i].naz,
-						obj[i].semester,
-						obj[i].rating,
-						obj[i].requirements,
-						obj[i].mandatory
-					);
+	this.fetchCourses = function(callback) {
+		var _this = this;
+		getJSON("GetCoursesByAgged", { "aggedId": this.id }, function(obj) {
+			for (var i = 0; i < obj.length; i++) {
+				var divisor, semester = courseSemester.replace("\u0027", "'");
+				if (semester == "קורס שנתי") divisor = 28;
+				else if (semester == "א'" || semester == "ב'") divisor = 14;
+				else divisor = 1; // summer semester
+				_this.courses[i] = new Course(
+					obj[i].id,
+					obj[i].name,
+					obj[i].nz,
+					semester,
+					obj[i].totalHours / divisor,
+					obj[i].type,
+					obj[i].exam,
+					obj[i].aggadim //reparse egged 
+				);
 			}
+			callback();
 		});
-		xhr.done(callback);
 	}
 	
 	//fetch list of maslulim based on eged id
@@ -246,21 +197,23 @@ function Eged(id, year, type, notes) {
 	this.getCourses = function() { return this.courses; }
 }
 
-function Course(id, name, naz, semester, rating, requirements, mandatory) {
+function Course(id, name, naz, semester, weeklyHours, type, exam, agadim) {
 	this.id = id;
 	this.name = name;
 	this.naz = naz;
 	this.semester = semester;
-	this.rating = rating; //might need to change into a Rating object (and hold more data?)
-	this.requirements = requirements;
-	this.mandatory = mandatory;
 	this.teachers = []; //list of teachers
+	this.weeklyHours = weeklyHours;
+	this.type = type;
+	this.exam = exam;
+	this.agadim = aggadim;
 	
 	this.getId = function() { return this.id; }
 	this.getName = function() { return this.name; }
 	this.getNaz = function() { return this.naz; }
 	this.getSemester = function() { return this.semester; }
-	this.getRating = function() { return this.rating; }
-	this.getRequirements = function() { return this.requirements; }
-	this.isMandatory = function() { return this.mandatory; }
+	this.getWeeklyHours = function() { return this.weeklyHours; } //might return semesterial hours
+	this.getCourseLessonType = function() { return this.type; }
+	this.getExamType = function() { return this.type; }
+	this.getAgadim = function() { return this.agadim; }
 }
