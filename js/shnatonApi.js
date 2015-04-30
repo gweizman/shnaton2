@@ -6,8 +6,9 @@ function stripXML(data) {
 }
 function getJSON(url, dataToSend, callback) {
 		$.ajax({
-		dataType: "text",
+		dataType: 'text',
 		data: dataToSend,
+		method: 'POST',
 		url: webService + "/" + url,
 		success: function(data, status) {
 			if (status == "success") {
