@@ -8,7 +8,6 @@ function getJSON(url, dataToSend, callback) {
 		$.ajax({
 		dataType: 'text',
 		data: dataToSend,
-		//method: 'POST',
 		url: webService + "/" + url,
 		success: function(data, status) {
 			if (status == "success") {
@@ -147,12 +146,12 @@ function Eged(id, year, type, notes) {
 				if (semester == "קורס שנתי") divisor = 28;
 				else if (semester == "א'" || semester == "ב'") divisor = 14;
 				else divisor = 1; // summer semester
-				var eged = [];
+				/*var eged = [];
 				for (var j = 0; j < obj[i].aggadim.length; j++) {
 					getJSON("GetAggadByAggadId", { "aggadId": obj[i].aggadim[j] }, function(obj) {
 						eged[j] = new Eged(obj.id, obj.yearToar, obj.type, obj.note);
 					});
-				}
+				}*/
 				_this.courses[i] = new Course(
 					obj[i].id,
 					obj[i].name,
@@ -161,7 +160,7 @@ function Eged(id, year, type, notes) {
 					obj[i].totalHours / divisor,
 					obj[i].type,
 					obj[i].exam,
-					eged //reparse egged
+					obj[i].aggadim //no reparsing
 				);
 			}
 			callback();
