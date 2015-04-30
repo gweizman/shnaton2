@@ -33,13 +33,14 @@ function Faculty(id, name) {
 	this.name = name;
 	this.chugim = []; //list of chugim object
 	
-	this.fetchChugim = function(arr) {
+	this.fetchChugim = function() {
 		this.fetchChugimInternal(function(arr) {
+			console.log(arr);
 			this.chugim = arr;
 		});
 	}
 	//fetch list of relavent chugim
-	this.fetchChugimInternal = function(callback) {
+	this.fetchChugim = function(faculty, callback) {
 		getJSON("GetChugimByFaculty", { "facultyId" : this.id }, function(obj) {
 			var arr = [];
 			for (var i = 0; i < obj.length; i++) {
