@@ -1,0 +1,97 @@
+Faculty –
+	GET –
+		{
+			{
+				Id: id
+				Name: name
+			},
+			…
+		}
+
+Chug/faculty_id/ –
+	GET –
+		{
+			{
+				Id: id
+				Name: name
+				Reception: {
+					Bagrut,
+					Psycho,
+                    Extra(/notes)
+				}
+			},
+			…
+		}
+ 
+Maslulim/chug_id/ -
+    GET -
+        {
+            {
+                FacultyId:
+                Id:
+                Name:
+                DegreeType:
+                Type: [חד-חוגי, דו-חוגי, חטיבה, רב-חוגי, NULL, אחר]
+                Rating:
+                Naz:
+                Years:
+            },
+            ...
+        }
+
+Aggadim/maslul_id/
+    GET -
+        {
+            {
+                id,
+                year_toar
+                sort_index (?)
+                type
+                note
+            },
+        }
+
+Courses/egged/egged_id/ -
+    GET -
+        {
+            Same as by MASLUL
+        }
+        
+Courses/maslul/maslul_id/ -
+    GET -
+        {
+            {
+                Name
+                Id
+                Naz
+                Semester
+                Rating
+                Requirements
+                Mandatory [bool]
+            },
+            ...
+        }
+
+Course/course_id/ -
+    GET -
+        {
+            Id
+            Name
+            Semester
+            Chug
+            Type
+            Hours
+            Exam_type
+        }
+        
+Tests/course_id/ -
+    GET -
+        {
+            id
+            group_id (?)
+            semester
+            day
+            start
+            end
+            hall
+        }
