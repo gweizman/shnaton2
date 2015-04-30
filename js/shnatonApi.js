@@ -35,7 +35,7 @@ function Faculty(id, name) {
 	
 	this.fetchChugim = function() {
 		this.fetchChugimInternal(function(arr) {
-			console.log(arr);
+			console.log(this);
 			this.chugim = arr;
 		});
 	}
@@ -46,7 +46,6 @@ function Faculty(id, name) {
 			for (var i = 0; i < obj.length; i++) {
 				arr[i] = new Chug(obj[i].id, obj[i].name, new Faculty(obj[i].hogFaculty.id, obj[i].hogFaculty.name));
 			}
-			console.log(arr);
 			callback(arr);
 		});
 	}
