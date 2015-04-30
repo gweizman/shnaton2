@@ -1,4 +1,4 @@
-var webService = "ShantonGeeter.asmx";
+var webService = "/ShantonGeeter.asmx";
 
 function populateFaculties(callback) {
 	var faculties = [];
