@@ -95,7 +95,7 @@
 					getJSON('GetCourseByName', { 'name': text }, function(obj) {
 						for (var i = 0; i < obj.length; i++) {
 							var name = obj[i].name;
-							var id = obj[i].id();
+							var id = obj[i].id;
 							if ($('#' + id).length == 0) {
 								$('<label id="' + id + '">' + name + '</label>').appendTo($('#searchResults')).hide().draggable();
 								$('#' + id).fadeIn();
