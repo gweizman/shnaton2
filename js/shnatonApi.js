@@ -11,15 +11,11 @@ function populateFaculties(callback) {
 		url: webService + "/GetAllFaculty",
 		success: function(data, status) {
 			if (status == "success") {
-				console.log(data);
-				console.log(data.toString());
-				console.log(stripXML(data));
 				var obj = $.parseJSON(stripXML(data));
 				var faculties = [];
 				for (var i = 0; i < obj.length; i++) {
 					faculties[faculties.length] = new Faculty(obj[i].id, obj[i].name);
 				}
-				console.log(faculties);
 				callback(faculties);
 			}
 		}
