@@ -6,7 +6,7 @@ function stripXML(data) {
 }
 
 function populateFaculties(callback) {
-	$.getJSON(webService + "/GetAllFaculty", function(data, status) {
+	$.getJSON(webService + "/GetAllFaculty", function(data, status, jqxhr) {
 		console.log(status);
 		if (status == "success") {
 			console.log(stripXML(data));
