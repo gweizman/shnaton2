@@ -11,13 +11,7 @@ function getJSON(url, dataToSend, callback) {
 		url: webService + "/" + url,
 		success: function(data, status) {
 			if (status == "success") {
-				var obj = $.parseJSON(stripXML(data));
-				callback(obj);
-				var faculties = [];
-				for (var i = 0; i < obj.length; i++) {
-					faculties[faculties.length] = new Faculty(obj[i].id, obj[i].name);
-				}
-				callback(faculties);
+				callback($.parseJSON(stripXML(data)));
 			}
 		}
 	});
