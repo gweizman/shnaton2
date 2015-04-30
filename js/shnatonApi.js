@@ -11,6 +11,7 @@ function populateFaculties(callback) {
 		url: webService + "/GetAllFaculty",
 		success: function(data, status) {
 			if (status == "success") {
+				console.log(data.toString());
 				console.log(stripXML(data));
 				var obj = $.parseJSON(stripXML(data));
 				var faculties = [];
