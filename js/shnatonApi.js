@@ -8,8 +8,7 @@ function stripXML(data) {
 function populateFaculties(callback) {
 	$.ajax({
 		dataType: "xml",
-		url: url,
-		data: data,
+		url: webService + "/GetAllFaculty",
 		success: function(data, status) {
 			console.log(status);
 			if (status == "success") {
