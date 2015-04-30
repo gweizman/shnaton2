@@ -25,20 +25,6 @@ function populateFaculties(callback) {
 		}
 		callback(faculties);
 	});
-	/*$.ajax({
-		dataType: "text",
-		url: webService + "/GetAllFaculty",
-		success: function(data, status) {
-			if (status == "success") {
-				var obj = $.parseJSON(stripXML(data));
-				var faculties = [];
-				for (var i = 0; i < obj.length; i++) {
-					faculties[faculties.length] = new Faculty(obj[i].id, obj[i].name);
-				}
-				callback(faculties);
-			}
-		}
-	});*/
 }
 
 function Faculty(id, name) {
@@ -48,16 +34,12 @@ function Faculty(id, name) {
 	
 	//fetch list of relavent chugim
 	this.fetchChugim = function(callback) {
-		var xhr = $.getJSON(webService + "/GetChugimByFaculty", this.id, function(data, status) {
-			if (status == "success") {
-				var obj = $.parseJSON(data);
-				for (var i = 0; i < obj.length; i++) {
-					this.chugim[i] = new Chug(obj[i].id, obj[i].name, this.id);
-					//reception and extra notes?
-				}
+		getJSON("GetChugimByFaculty", this.id, function(obj) {
+			for (var i = 0; i < obj.length; i++) {
+				this.chugim[i] = new Chug(obj[i].id, obj[i].name, new Faculty(this.id, this.name));
 			}
+			callback();
 		});
-		xhr.done(callback);
 	}
 	
 	this.getId = function() { return this.id; }
@@ -65,10 +47,10 @@ function Faculty(id, name) {
 	this.getChugim = function() { return this.chugim; }
 }
 
-function Chug(id, name, faculty_id) {
+function Chug(id, name, faculty) {
 	this.id = id;
 	this.name = name;
-	this.facultyId = faculty_id;
+	this.faculty = faculty;
 	this.maslulim = []; //list of maslul object
 	
 	//fetch list of relavent maslulim
