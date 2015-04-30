@@ -7,10 +7,11 @@ function stripXML(data) {
 
 function populateFaculties(callback) {
 	$.ajax({
-		dataType: "xml",
+		dataType: "text",
 		url: webService + "/GetAllFaculty",
 		success: function(data, status) {
 			if (status == "success") {
+				console.log(data);
 				console.log(data.toString());
 				console.log(stripXML(data));
 				var obj = $.parseJSON(stripXML(data));
