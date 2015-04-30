@@ -5,6 +5,7 @@ $(function() {
             $("#faculty > #buttons > a[data-id=\"" + faculty.id + "\"]").data("object", faculty);
         });
         $("#faculty > #buttons > .button").click(function() {
+            alert("A");
             $("#chug-faculty").html($(this).html(), function() {
                 var _this = this;
                 //console.log(_this.data("object"));
