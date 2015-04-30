@@ -40,7 +40,7 @@ function Faculty(id, name) {
 		});
 	}
 	//fetch list of relavent chugim
-	this.fetchChugim = function(faculty, callback) {
+	this.fetchChugimInternal = function(callback) {
 		getJSON("GetChugimByFaculty", { "facultyId" : this.id }, function(obj) {
 			var arr = [];
 			for (var i = 0; i < obj.length; i++) {
