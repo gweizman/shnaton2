@@ -4,9 +4,34 @@ var webService = "/ShantonGeeter.asmx";
 function stripXML(data) {
 	return data.toString().replace(/(<([^>]+)>)/ig,"").replace(/%22/, "\\\"");
 }
+function getJSON(url, dataToSend, callback) {
+		$.ajax({
+		dataType: "text",
+		data: dataToSend,
+		url: webService + "/" + url,
+		success: function(data, status) {
+			if (status == "success") {
+				var obj = $.parseJSON(stripXML(data));
+				callback(obj);
+				var faculties = [];
+				for (var i = 0; i < obj.length; i++) {
+					faculties[faculties.length] = new Faculty(obj[i].id, obj[i].name);
+				}
+				callback(faculties);
+			}
+		}
+	});
+}
 
 function populateFaculties(callback) {
-	$.ajax({
+	getJSON("GetAllFaculty", "", function(obj) {
+		var faculties = [];
+		for (var i = 0; i < obj.length; i++) {
+			faculties[faculties.length] = new Faculty(obj[i].id, obj[i].name);
+		}
+		callback(faculties);
+	});
+	/*$.ajax({
 		dataType: "text",
 		url: webService + "/GetAllFaculty",
 		success: function(data, status) {
@@ -19,7 +44,7 @@ function populateFaculties(callback) {
 				callback(faculties);
 			}
 		}
-	});
+	});*/
 }
 
 function Faculty(id, name) {
@@ -29,7 +54,7 @@ function Faculty(id, name) {
 	
 	//fetch list of relavent chugim
 	this.fetchChugim = function(callback) {
-		var xhr = $.getJSON(webService + "/...", this.id, function(data, status) {
+		var xhr = $.getJSON(webService + "/GetChugimByFaculty", this.id, function(data, status) {
 			if (status == "success") {
 				var obj = $.parseJSON(data);
 				for (var i = 0; i < obj.length; i++) {
