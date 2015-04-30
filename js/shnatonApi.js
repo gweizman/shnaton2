@@ -8,7 +8,7 @@ function getJSON(url, dataToSend, callback) {
 		$.ajax({
 		dataType: 'text',
 		data: dataToSend,
-		method: 'POST',
+		//method: 'POST',
 		url: webService + "/" + url,
 		success: function(data, status) {
 			if (status == "success") {
@@ -35,7 +35,7 @@ function Faculty(id, name) {
 	
 	//fetch list of relavent chugim
 	this.fetchChugim = function(callback) {
-		getJSON("GetChugimByFaculty", this.id, function(obj) {
+		getJSON("GetChugimByFaculty", { "facultyId" : this.id }, function(obj) {
 			for (var i = 0; i < obj.length; i++) {
 				this.chugim[i] = new Chug(obj[i].id, obj[i].name, new Faculty(this.id, this.name));
 			}
