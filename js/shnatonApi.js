@@ -6,17 +6,22 @@ function stripXML(data) {
 }
 
 function populateFaculties(callback) {
-	$.getJSON(webService + "/GetAllFaculty", function(data, status, jqxhr) {
-		console.log(status);
-		if (status == "success") {
-			console.log(stripXML(data));
-			var obj = $.parseJSON(stripXML(data));
-			var faculties = [];
-			for (var i = 0; i < obj.length; i++) {
-				faculties[faculties.length] = new Faculty(obj[i].id, obj[i].name);
+	$.ajax({
+		dataType: "xml",
+		url: url,
+		data: data,
+		success: function(data, status) {
+			console.log(status);
+			if (status == "success") {
+				console.log(stripXML(data));
+				var obj = $.parseJSON(stripXML(data));
+				var faculties = [];
+				for (var i = 0; i < obj.length; i++) {
+					faculties[faculties.length] = new Faculty(obj[i].id, obj[i].name);
+				}
+				console.log(faculties);
+				callback(faculties);
 			}
-			console.log(faculties);
-			callback(faculties);
 		}
 	});
 }
