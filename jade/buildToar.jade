@@ -1,0 +1,65 @@
+﻿#faculty.center.buttonlist
+    h2 בחר פקולטה
+    a(data-id=1).button מדעי הרוח
+    a(data-id=1).button מדעי הטבע
+    a(data-id=1).button משפטים
+    a(data-id=1).button רפואה
+    a(data-id=1).button רפואת שיניים
+    a(data-id=1).button עוד פקולטה
+    
+#chug.center.buttonlist(style="display: none")
+    h2#chug-faculty
+    a(data-id=1).button חוג
+    a(data-id=1).button חוג אחר
+    a(data-id=1).button עוד חוג
+    a(data-id=1).button רפואה
+    a(data-id=1).button רפואת שיניים
+    
+#maslul.center.buttontable(style="display: none")
+    h2#maslul-chug-faculty
+    a(data-id=1).button חוג
+    a(data-id=1).button חוג אחר
+    a(data-id=1).button עוד חוג
+    a(data-id=1).button רפואה
+    a(data-id=1).button רפואת שיניים
+    a(data-id=1).button רפואת שיניים
+    a(data-id=1).button חוג
+    a(data-id=1).button חוג אחר
+    a(data-id=1).button עוד חוג
+    a(data-id=1).button רפואה
+    a(data-id=1).button רפואת שיניים
+    a(data-id=1).button רפואת שיניים
+    a(data-id=1).button חוג
+    a(data-id=1).button חוג אחר
+    a(data-id=1).button עוד חוג
+    a(data-id=1).button רפואה
+    a(data-id=1).button רפואת שיניים
+    a(data-id=1).button רפואת שיניים
+    
+#courses.center(style="display:none")
+    h2#courses-maslul-chug-faculty
+    ul.accordion(data-accordion)#courses-accordion
+        li.accordion-navigation
+            a(href="#panel1a") שנה א'
+            #panel1a.content.active
+                table(style="width: 100%; text-align: right")
+                    thead
+                        tr
+                            th מספר
+                            th שם
+                            th נ"ז
+                            th דירוג
+                    tbody
+                        tr
+                            td 1
+                            td קורס
+                            td לא מספיק
+                            td 0
+        li.accordion-navigation
+            a(href="#panel2a") שנה ב'
+            #panel2a.content
+                | a
+        li.accordion-navigation
+            a(href="#panel3a") שנה ג'
+            #panel3a.content
+                | a

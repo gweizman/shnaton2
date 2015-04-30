@@ -1,11 +1,14 @@
 ﻿#header
+    img(src="/img/huji logo.png")#huji-logo
     ul.no-bullet
-        li
-            a#search-icon(href="#").header-icon
+        li#search-icon
+            a(href="#").header-icon
                 img(src="img/search.png")    
-        li
-            a#logo-icon(href="#").header-icon
+        li#logo-icon
+            a(href="#").header-icon
                 img(src="img/logo.png")
-        li
-            a#profile-icon(href="#").header-icon
+        li#profile-icon
+            a(href="#").header-icon
                 img(src="img/profile.png")
+    form(style="display: none")#search-form
+        input#search-bar

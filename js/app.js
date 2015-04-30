@@ -3,8 +3,9 @@ $.ajaxSetup({ cache: false });
 var typeChosen = null;
 
 function loadPage(html, javascript) {
-    $("#content").load(html);
-    $.getScript(javascript);
+    $("#content").load(html, function() {
+        $.getScript(javascript);
+    });
 }
 
 function loadCourse(id) {
@@ -16,7 +17,7 @@ function loadCourse(id) {
 
 function loadMainPage() {
     if (typeChosen == null) {
-        loadPage("/chooseType.html", "/js/chooseType.js");
+        loadPage("/buildToar.html", "/js/buildToar.js");
     } else {
         switch (typeChosen) {
             case "exists":
@@ -31,4 +32,7 @@ function loadMainPage() {
 
 $(function() {
     loadMainPage();
+    $("#search-icon").click(function() {
+        $("#search-form").toggle("slide");
+    });
 });

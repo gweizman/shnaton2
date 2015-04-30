@@ -41,9 +41,9 @@
 //   "foundation/components/visibility";
 
 $text-direction: rtl;
-$header-height: 300px;
-$header-width: 400px;
-$icon-size: 100px;
+$header-height: 300px; // 30vmin;
+$header-width: 400px; //50vmin;
+$icon-size: $header-width / 4;
 
 html {
     border: 0;
@@ -78,11 +78,17 @@ body {
         border-color: transparent #3f9cbb transparent transparent;
         z-index: -1;
     }
-    
-    ul {
-        li {
-            margin: 0;
-            padding: 0;
+    ul li {
+        display: block;
+        position: fixed;
+        top: 0;
+        clear: none;
+        right: 0;
+    }
+    @for $i from 0 to 4 {
+        ul li:nth-child(#{$i}) {
+            margin-top: ($i - 1) * ($header-height / 4) !important;
+            margin-right: (3 - $i) * ($header-width / 4) !important;
         }
     }
 }
@@ -94,15 +100,70 @@ body {
     }
 }
 
-#search-icon {
-    margin-right: 200px;
+#huji-logo {
+    height: 130px;
+    width: 130px * 275 / 433;
+    margin-right: 10px;
 }
 
-#logo-icon {
-    margin-right: 100px;
-    margin-top: -20px;
+#search-form {
+    position: fixed;
+    top: 0px;
+    right: (3 - 1) * ($header-width / 4) + $icon-size !important;
+}
+#search-bar {
+    background: url('/img/search bar.png') no-repeat right top;
+    background-size: contain;
+    height: 90px;
+    width: 1400px;
+    border: 0;
+    font-size: 50px;
+    padding-right: 40px;
+    z-index: 100;
+    
+    &:focus {
+        border: 0;
+    }
 }
 
-#profile-icon {
-    margin-top: -40px;
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
+
+.buttonlist {
+    width: 300px;
+    
+    .button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    h2 {
+        width: 100%;
+    }
+}
+
+.buttontable {
+    width: 900px;
+    
+    .button {
+        width: 290px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+    }
+    
+    h2 {
+        width: 100%;
+    }
+}
+
+#courses {
+    width: 900px;
+}
+
+table, tr, td, th {
+    text-align: right !important;
+}
+
