@@ -4,7 +4,7 @@ $(function() {
             $("#faculty > #buttons").append('<a data-id="' + faculty.id + '" class="button">' + faculty.name + '</a>');
             $("#faculty > #buttons > a[data-id=\"" + faculty.id + "\"]").data("object", faculty);
         });
-        $("#faculty > .button").click(function() {
+        $("#faculty > #buttons > .button").click(function() {
             $("#chug-faculty").html($(this).html(), function() {
                 var _this = this;
                 //console.log(_this.data("object"));
