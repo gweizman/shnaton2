@@ -206,7 +206,7 @@ function Course(id, name, naz, semester, weeklyHours, type, exam, agadim) {
 	this.weeklyHours = weeklyHours;
 	this.type = type;
 	this.exam = exam;
-	this.agadim = aggadim;
+	this.agadim = agadim;
 	
 	this.getId = function() { return this.id; }
 	this.getName = function() { return this.name; }
