@@ -33,20 +33,14 @@ function Faculty(id, name) {
 	this.name = name;
 	this.chugim = []; //list of chugim object
 	
-	this.fetchChugim = function() {
-		this.fetchChugimInternal(function(arr) {
-			console.log(this);
-			this.chugim = arr;
-		});
-	}
 	//fetch list of relavent chugim
-	this.fetchChugimInternal = function(callback) {
+	this.fetchChugim = function(callback) {
+		var _this = this;
 		getJSON("GetChugimByFaculty", { "facultyId" : this.id }, function(obj) {
-			var arr = [];
 			for (var i = 0; i < obj.length; i++) {
-				arr[i] = new Chug(obj[i].id, obj[i].name, new Faculty(obj[i].hogFaculty.id, obj[i].hogFaculty.name));
+				_this.chugim[i] = new Chug(obj[i].id, obj[i].name, new Faculty(obj[i].hogFaculty.id, obj[i].hogFaculty.name));
 			}
-			callback(arr);
+			callback();
 		});
 	}
 	
