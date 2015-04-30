@@ -14,9 +14,9 @@ function populateFaculties(callback) {
 			for (var i = 0; i < obj.length; i++) {
 				faculties[faculties.length] = new Faculty(obj[i].id, obj[i].name);
 			}
+			console.log(faculties);
 		}
-	});
-	xhr.done(callback(faculties));
+	}).done(callback(faculties));
 }
 
 function Faculty(id, name) {
