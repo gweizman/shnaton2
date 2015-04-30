@@ -143,7 +143,7 @@ function Eged(id, year, type, notes) {
 		var _this = this;
 		getJSON("GetCoursesByAgged", { "aggedId": this.id }, function(obj) {
 			for (var i = 0; i < obj.length; i++) {
-				var divisor, semester = courseSemester.replace("\u0027", "'");
+				var divisor, semester = obj[i].courseSemester.replace("\u0027", "'");
 				if (semester == "קורס שנתי") divisor = 28;
 				else if (semester == "א'" || semester == "ב'") divisor = 14;
 				else divisor = 1; // summer semester
