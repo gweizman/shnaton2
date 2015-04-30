@@ -2,7 +2,7 @@ var webService = "/ShantonGeeter.asmx";
 
 //strip xml, replace %22 with "
 function stripXML(data) {
-	return data.toString().replace(/(<([^>]+)>)/ig,"").replace(/%22/, "\\\"");
+	return data.toString().replace(/(<([^>]+)>)/ig,"").replace(/%22/ig, "\\\"");
 }
 function getJSON(url, dataToSend, callback) {
 		$.ajax({
