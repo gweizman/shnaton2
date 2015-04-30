@@ -33,8 +33,9 @@ function Faculty(id, name) {
 	this.name = name;
 	this.chugim = []; //list of chugim object
 	
-	this.fetchChugim = function(arr) {
+	this.fetchChugim = function() {
 		this.fetchChugimInternal(function(arr) {
+			console.log(arr);
 			this.chugim = arr;
 		});
 	}
