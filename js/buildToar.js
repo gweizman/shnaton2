@@ -2,6 +2,7 @@ $(function() {
     populateFaculties(function(faculties) {
         faculties.forEach(function(faculty) {
             $("#faculty > #buttons").append('<a data-id="' + faculty.id + '" class="button">' + faculty.name + '</a>');
+            $("a[data-id=\"" + faculty.id + "\"]").data("object", faculty);
         });
     });
     
