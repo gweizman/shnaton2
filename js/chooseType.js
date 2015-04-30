@@ -1,10 +1,10 @@
 $(function() {
     $("#existingStudent").click(function() {
-        typeChosen = "exists"
+        typeChosen = "exists";
         loadMainPage();
     });
     $("#newStudent").click(function() {
-        typeChosen = "new"
+        typeChosen = "new";
         loadMainPage();
     });
 });
