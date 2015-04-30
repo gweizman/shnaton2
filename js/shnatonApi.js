@@ -2,7 +2,7 @@ var webService = "/ShantonGeeter.asmx";
 
 //strip xml, replace %22 with "
 function stripXML(data) {
-	return data.toString().replace(/(<([^>]+)>)/ig,"").replace(/%22/, "\\\"");
+	return data.toString().replace(/(<([^>]+)>)/ig,"").replace(/%22/ig, "\\\"");
 }
 function getJSON(url, dataToSend, callback) {
 		$.ajax({
@@ -43,7 +43,7 @@ function Faculty(id, name) {
 		getJSON("GetChugimByFaculty", { "facultyId" : this.id }, function(obj) {
 			var arr = [];
 			for (var i = 0; i < obj.length; i++) {
-				arr[i] = new Chug(obj[i].id, obj[i].name, new Faculty(obj[i].hogFaculty.id, this.hogFaculty.name));
+				arr[i] = new Chug(obj[i].id, obj[i].name, new Faculty(obj[i].hogFaculty.id, obj[i].hogFaculty.name));
 			}
 			console.log(arr);
 			callback(arr);
