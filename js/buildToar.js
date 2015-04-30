@@ -13,15 +13,12 @@ function updateChugim(faculty) {
 
 function updateFaculties() {
     populateFaculties(function(faculties) {
+        console.log(faculties);
         $("#faculty > #buttons").html('');
         faculties.forEach(function(faculty) {
             alert(faculty);
             $("#faculty > #buttons").append('<option data-id="' + faculty.id + '" value="' + faculty.id + '">' + faculty.name + '</option>');
             $("#faculty > #buttons > option[data-id=\"" + faculty.id + "\"]").data("object", faculty);
-        });
-        $('#faculty > #buttons').selectize({
-            create: false,
-            sortField: 'text'
         });
     });
     $("#faculty > #buttons > .button").click(function() {
