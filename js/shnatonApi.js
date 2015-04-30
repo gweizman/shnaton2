@@ -1,9 +1,8 @@
 var webService = "/ShantonGeeter.asmx";
 
 //strip xml, replace %22 with "
-function stripXML(string) {
-	string = string.replace(/(<([^>]+)>)/ig,"");
-	return string.replace(/%22/, "\\\"");
+function stripXML(data) {
+	return data.toString().replace(/(<([^>]+)>)/ig,"").replace(/%22/, "\\\"");
 }
 
 function populateFaculties(callback) {
