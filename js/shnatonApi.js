@@ -168,20 +168,6 @@ function Eged(id, year, type, notes) {
 		});
 	}
 	
-	//fetch list of maslulim based on eged id
-	this.fetchCourses = function() {
-		var xhr = $.getJSON(webService + "/ ...", this.id, function(data, status) {
-			if (status == "success") {
-				var obj = $.parseJSON(data);
-				for (var i = 0; i < obj.length; i++)
-					this.agadim[i] = new Maslul(
-						
-					);
-			}
-		});
-		xhr.done(callback);
-	}
-	
 	this.getId = function() { return this.id; }
 	this.getYear = function() { return this.year; }
 	this.getTypeID = function() { return this.type; }
