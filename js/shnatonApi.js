@@ -1,5 +1,10 @@
 var webService = "/ShantonGeeter.asmx";
 
+//strip xml, replace %22 with "
+function stripXML(data) {
+	return data.replace(/(<([^>]+)>)/ig,"").replace(/%22/, "\\\"");
+}
+
 function populateFaculties(callback) {
 	var faculties = [];
 	var xhr = $.getJSON(webService + "/GetAllFaculty", this.id, function(data, status) {
@@ -66,10 +71,6 @@ function Chug(id, name, faculty_id) {
 	this.getId = function() { return this.id; }
 	this.getName = function() { return this.name; }
 	this.getMaslulim = function() { return this.maslulim; }
-}
-
-function stripXML(data) {
-	return data.replace(/(<([^>]+)>)/ig,"");
 }
 
 function Maslul(id, name, degreeType, type, rating, years) {
