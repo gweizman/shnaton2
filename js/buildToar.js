@@ -10,7 +10,7 @@ $(function() {
         $("#chug-faculty").html($(this).html(), function() {
             var _this = $(this);
             _this.data("object").fetchChugim(function() {
-                _this.data("object").getChugim.forEach(function(chug) {
+                _this.data("object").getChugim().forEach(function(chug) {
                     $("#chug > #buttons").append('<a data-id="' + chug.id + '" class="button">' + chug.name + '</a>');
                     $("#chug > #buttons > a[data-id=\"" + chug.id + "\"]").data("object", chug);                   
                 });
