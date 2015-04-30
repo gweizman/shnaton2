@@ -1,8 +1,9 @@
 var webService = "/ShantonGeeter.asmx";
 
 //strip xml, replace %22 with "
-function stripXML(data) {
-	return data.replace(/(<([^>]+)>)/ig,"").replace(/%22/, "\\\"");
+function stripXML(string) {
+	string = string.replace(/(<([^>]+)>)/ig,"");
+	return string.replace(/%22/, "\\\"");
 }
 
 function populateFaculties(callback) {
@@ -10,7 +11,6 @@ function populateFaculties(callback) {
 		dataType: "xml",
 		url: webService + "/GetAllFaculty",
 		success: function(data, status) {
-			console.log(status);
 			if (status == "success") {
 				console.log(stripXML(data));
 				var obj = $.parseJSON(stripXML(data));
