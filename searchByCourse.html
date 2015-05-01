@@ -1,6 +1,13 @@
 <div class="row">
+	#drop {
+  border: 3px dashed #ccc;
+  padding: 10px;
+  background: #fff;
+  min-height: 200px;
+/*  overflow-y: auto;*/
+}
 		<div id="validMaslulim">
-			<span class="button">Add Course</span>
+			<span class="button" style="border: 3px dashed #ccc; padding: 10px; background: #fff; min-height: 100px">Drag and drop here!</span>
 			<div id="selectedCourses"></div>
 		</div>
 		<div id="searchArea">
@@ -63,7 +70,7 @@
 					for (var i = 0; i < kids.length; i++) {
 						ids[ids.length] = $(kids[i]).attr('id');
 					}
-				getJSON("GetMaslulsByCourses", ids.toJSON(), function(obj) {
+				getJSON("GetMaslulsByCourses", ids, function(obj) {
 					console.log(obj);
 				});
 			}
