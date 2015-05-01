@@ -11,7 +11,7 @@ function updateChugim(faculty) {
                 }
             );                   
         });
-        faculty.getChugim.enable();
+        faculty.getChugim.enable(); 
     });
 }
 
@@ -19,8 +19,8 @@ function updateFaculties() {
     faculties = {};
     populateFaculties(function(faculties) {
         $('#faculty > #buttons').data('selectize').clearOptions();
-         faculties[faculty.id] = faculty;
          faculties.forEach(function(faculty) {
+            faculties[faculty.id] = faculty;
             $('#faculty > #buttons').data('selectize').addOption(
                 {
                     id: faculty.id,
