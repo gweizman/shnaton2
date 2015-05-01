@@ -18,6 +18,9 @@
 		</div>
 	</ul>
 </div>
+		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/shnatonApi.js"></script>
 <script>
 	$(document).ready(function() {
 		$.urlParam = function(name){
@@ -34,8 +37,7 @@
 			$('#weeklyHours').append(obj.totalHours / divisor);
 			$('#lessonType').append(obj.type);
 			$('#title').html(obj.name + ' (' + obj.id + ')');
-			
-			//{"nz":7,"courseYear":0,"courseSemester":"ב\u0027","totalHours":98,"type":"שעור ותרגיל","exam":"NULL","aggadim":[2454,5835,2292,6540,6579,2492,3148,9042,9093,9025,6101],"id":80133,"name":"חשבון אינפיניטסימלי 2 לתלמידי מדעי המחשב "}
+			$('#chug').append(obj.GevinigChug);
 		});
 	});
 </script>
