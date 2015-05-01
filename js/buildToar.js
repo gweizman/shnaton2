@@ -9,7 +9,6 @@ function loadCourses() {
     chosenMaslulim.forEach(function(maslul) {
     maslul.fetchAgadim(function() {
             maslul.getAgadim().forEach(function(egged) {
-                console.log(egged);
                 switch (egged.year) {
                     case 1:
                     case '1':
@@ -71,7 +70,9 @@ function updateMaslulim(chug) {
         chosenMaslulim[0].getSecondPossibleMaslulim(chug.id, function(maslulim) {
             console.log(maslulim);
             maslulim.forEach(function(maslul) {
+                console.log(maslul.id);
                 window.maslulim[maslul.id] = maslul;
+                console.log(window.maslulim);
                 $('#maslul > #buttons').data('selectize').addOption(
                     {
                         id: maslul.id,
@@ -185,9 +186,8 @@ $(function() {
         searchField: 'text',
         onChange: function(value) {
                 $("#finished > a").removeClass("disabled").click(function() {
-                    console.log(value);
                     console.log(maslulim[value]);
-                    chosenMaslulim[chosenMaslulim.length] = maslulim[value];
+                    chosenMaslulim.push(maslulim[value]);
                     loadCourses();
                 });
             }
