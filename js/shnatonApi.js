@@ -109,12 +109,13 @@ function Maslul(id, name, degreeType, type) {
 	this.getDegreeType = function() { return this.degreeType; }
 	this.getCourses = function() { return this.courses; }
 	this.getAgadim = function() { return this.agadim; }
-	this.getSecondPossibleMaslulim = function(chug_id) {
+	this.getSecondPossibleMaslulim = function(chug_id, callback) {
 		getJSON("GetSecondMaslul", { "firstMaslulId": this.id, "chugId": chug_id }, function(obj) {
 			var arr = [];
 			for (var i = 0; i < obj.length; i++) {
 				arr[i] = new Maslul(obj[i].id, obj[i].name, obj[i].degreeType, obj[i].type);
 			}
+			callback(arr);
 		});
 	}
 }
