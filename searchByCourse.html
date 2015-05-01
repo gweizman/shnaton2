@@ -97,7 +97,7 @@
 							var name = obj[i].name;
 							var id = obj[i].id;
 							if ($('#' + id).length == 0) {
-								$('<label id="' + id + '">' + name + '</label>').appendTo($('#searchResults')).hide().draggable();
+								$('<label id="' + id + '">' + name + '</label>').appendTo($('#searchResults')).hide().draggable({revert: "invalid"});
 								$('#' + id).fadeIn();
 							}
 						}
