@@ -69,6 +69,7 @@ function loadCourses() {
 function updateMaslulim(chug) {
     if (chosenMaslulim.length > 0) {
         chosenMaslulim[0].getSecondPossibleMaslulim(chug.id, function(maslulim) {
+            console.log(maslulim);
             maslulim.forEach(function(maslul) {
                 window.maslulim[maslul.id] = maslul;
                 $('#maslul > #buttons').data('selectize').addOption(
