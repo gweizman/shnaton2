@@ -174,3 +174,68 @@ table, tr, td, th {
     text-align: right !important;
 }
 
+body {
+    background:                 #666;
+  margin:                       0;
+  padding:                      0;
+}
+.centererer {
+  position:                     absolute;
+  height:                       26px;
+  width:                            26px;
+  top:                              50%;
+  margin-top:               -20px;
+  left:                             50%;
+  margin-left:              -20px;
+}
+
+
+
+.close {
+    $color:                 #f2f2f2;
+    @include background(linear-gradient(rgba(#fff, .5), rgba(#fff, 0)),
+                        radial-gradient($color, darken($color, 15%)));
+    @include border-radius(50px);
+    @include box-shadow(inset 0 1px 1px rgba(darken($color, 20%), .75),
+                        0 2px 1px rgba(#000, .25)
+                        );
+    @include text-shadow(0 1px 0 rgba(#fff, .5));
+
+    border:                     2px solid darken(#fff, 10%);
+    color:                      darken(#fff, 30%);
+    float:                      right;
+    height:                     23px;
+    width:                      23px;
+    text-indent:            -9999px;
+    position:               absolute;
+    text-decoration:    none;
+
+    &::after {
+        content:                "\2716";
+        text-indent:        0;
+        display:                block;
+        position:               absolute;
+        top:                        2px;
+        right:                  5px;
+    font-size:          12px;
+    }
+
+    &:hover {
+        $color:                 darken(#fff, 30%);
+        color:                  darken(#fff, 10%);
+        @include background(linear-gradient(rgba(#fff, .5), rgba(#fff, 0)),
+                            radial-gradient($color, darken($color, 15%)));
+        @include text-shadow(0 -1px 0 rgba(darken(#fff, 40%), .5));
+    cursor:                 pointer;
+    }
+  
+  &:active {
+        $color:                 darken(#fff, 30%);
+
+        @include background(linear-gradient(rgba(#fff, .15), rgba(#fff, 0)),
+                            radial-gradient(darken($color, 15%), darken($color, 20%)));
+        @include text-shadow(0 -1px 0 rgba(lighten(#000, 10%), .5));
+    cursor:                 pointer;
+    }
+
+}
