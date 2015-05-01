@@ -121,6 +121,10 @@ function updateFaculties() {
     window.faculties = {};
     window.chugim = {};
     window.maslulim = {};
+    $('#faculty > #buttons').data('selectize').clear(true);
+    $('#faculty > #buttons').data('selectize').clearOptions();
+    $('#faculty > #buttons').data('selectize').clearclearOptions();
+    
     $('#chug > #buttons').data('selectize').clear(true);
     $('#chug > #buttons').data('selectize').clearOptions();
     $('#chug > #buttons').data('selectize').refreshOptions();
