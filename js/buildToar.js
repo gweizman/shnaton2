@@ -23,37 +23,36 @@ function loadCourses(maslul) {
                     break;
             }
         });
-    });
-    console.log(firstYear);
-    $("#year1 > table > tbody").html('');
-    $("#year2 > table > tbody").html('');
-    $("#year3 > table > tbody").html('');
-    firstYear.forEach(function(egged) {
-        egged.fetchCourses(function() {
-            egged.getCourses().forEach(function(course) {
-                $("#year1 > table > tbody").append(
-                    "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
-                );
+        $("#year1 > table > tbody").html('');
+        $("#year2 > table > tbody").html('');
+        $("#year3 > table > tbody").html('');
+        firstYear.forEach(function(egged) {
+            egged.fetchCourses(function() {
+                egged.getCourses().forEach(function(course) {
+                    $("#year1 > table > tbody").append(
+                        "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
+                    );
+                });
             });
         });
-    });
-    
-    secondYear.forEach(function(egged) {
-        egged.fetchCourses(function() {
-            egged.getCourses().forEach(function(course) {
-                $("#year2 > table > tbody").append(
-                    "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
-                );
+        
+        secondYear.forEach(function(egged) {
+            egged.fetchCourses(function() {
+                egged.getCourses().forEach(function(course) {
+                    $("#year2 > table > tbody").append(
+                        "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
+                    );
+                });
             });
         });
-    });
-    
-    thirdYear.forEach(function(egged) {
-        egged.fetchCourses(function() {
-            egged.getCourses().forEach(function(course) {
-                $("#year3 > table > tbody").append(
-                    "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
-                );
+        
+        thirdYear.forEach(function(egged) {
+            egged.fetchCourses(function() {
+                egged.getCourses().forEach(function(course) {
+                    $("#year3 > table > tbody").append(
+                        "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
+                    );
+                });
             });
         });
     });
