@@ -185,7 +185,9 @@ $(function() {
         searchField: 'text',
         onChange: function(value) {
                 $("#finished > a").removeClass("disabled").click(function() {
-                    chosenMaslulim.push(maslulim[value]);
+                    console.log(value);
+                    console.log(maslulim[value]);
+                    chosenMaslulim[chosenMaslulim.length] = maslulim[value];
                     loadCourses();
                 });
             }
