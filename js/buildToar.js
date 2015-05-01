@@ -115,35 +115,36 @@ function updateChugim(faculty) {
 }
 
 function updateFaculties() {
-    $("#finished > a").addClass("disabled").click(function() { });
-    window.faculties = {};
-    window.chugim = {};
-    window.maslulim = {};
-    $('#chug > #buttons').data('selectize').clearOptions();
-    $('#chug > #buttons').data('selectize').refreshOptions();
-    $('#chug > #buttons').data('selectize').disable();
+    $("#courses").hide("slide");
+    $("#notCourses").show("slide");
+    // $("#finished > a").addClass("disabled").click(function() { });
+    // window.faculties = {};
+    // window.chugim = {};
+    // window.maslulim = {};
+    // $('#chug > #buttons').data('selectize').clearOptions();
+    // $('#chug > #buttons').data('selectize').refreshOptions();
+    // $('#chug > #buttons').data('selectize').disable();
     
-    $('#maslul > #buttons').data('selectize').clearOptions();
-    $('#maslul > #buttons').data('selectize').refreshOptions();
-    $('#maslul > #buttons').data('selectize').disable();
+    // $('#maslul > #buttons').data('selectize').clearOptions();
+    // $('#maslul > #buttons').data('selectize').refreshOptions();
+    // $('#maslul > #buttons').data('selectize').disable();
     
     
     
-    populateFaculties(function(faculties) {
-        $('#faculty > #buttons').data('selectize').clearOptions();
-         faculties.forEach(function(faculty) {
-            window.faculties[faculty.id] = faculty;
-            $('#faculty > #buttons').data('selectize').addOption(
-                {
-                    id: faculty.id,
-                    text: faculty.name
-                }
-            );
-            $('#faculty > #buttons').data('selectize').refreshOptions();
-        });
-        $("#courses").hide("slide");
-        $("#notCourses").show("slide");
-    });
+    // populateFaculties(function(faculties) {
+        // $('#faculty > #buttons').data('selectize').clearOptions();
+         // faculties.forEach(function(faculty) {
+            // window.faculties[faculty.id] = faculty;
+            // $('#faculty > #buttons').data('selectize').addOption(
+                // {
+                    // id: faculty.id,
+                    // text: faculty.name
+                // }
+            // );
+            // $('#faculty > #buttons').data('selectize').refreshOptions();
+        // });
+        
+    // });
 }
 
 $(function() {
