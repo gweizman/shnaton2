@@ -67,7 +67,7 @@ $(function() {
         create: false,
         valueField: 'id',
         labelField: 'text',
-        searchField: 'text'
+        searchField: 'text',
         onChange: function(value) {
             updateMaslulim(chugim[value]);
         }
@@ -75,13 +75,13 @@ $(function() {
     $('#chug > #buttons').data('selectize', $chugSel[0].selectize);
     $('#chug > #buttons').data('selectize').disable();
     
-    $chugSel = $('#maslul > #buttons').selectize({
+    $maslulSel = $('#maslul > #buttons').selectize({
         create: false,
         valueField: 'id',
         labelField: 'text',
         searchField: 'text'
     });
-    $('#maslul > #buttons').data('selectize', $chugSel[0].selectize);
+    $('#maslul > #buttons').data('selectize', $maslulSel[0].selectize);
     $('#maslul > #buttons').data('selectize').disable();
     
     updateFaculties();
