@@ -80,7 +80,7 @@
 					$('<table id="maslulimTable" style="width: 100%; text-align: right;"></table>').appendTo($('#validMaslulim'));
 					$('<thead><tr><th>Maslul</th><th>Toar</th></tr></thead><tbody id="maslulimTableBody"></tbody>').appendTo($('#maslulimTable'));
 					for (var i = 0; i < obj.length; i++) {
-						var item1 = obj[i].Item1, item2 = obj[i].item2;
+						var item1 = obj[i].Item1, item2 = obj[i].Item2;
 						if (item2 != null) {
 							$('<tr><td>' + item1.name + '<br>' + item2.name + '</td><td>' +
 								item1.degreeType + '<br>' + item2.degreeType + '</td></tr>').appendTo($('#maslulimTableBody'));
