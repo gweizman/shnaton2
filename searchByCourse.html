@@ -73,6 +73,7 @@
 			}
 			ids[ids.length] = null; //add another field, null, just in case.
 			getJSON("Get2Masluls", { "courseId": ids[0], "courseId2": ids[1] }, function(obj) {
+				console.log(obj);
 				$('#maslulimTable').remove();
 				if (obj.length == 0) $('#validMaslulim').html('<h5 class="error">לא נמצאו מסלולים מתאימים.</h5>');
 				else {
