@@ -9,13 +9,12 @@ function addEgged(agadim, id, callback, firstYear, secondYear, thirdYear) {
         callback();
     }
     else {
+        console.log(firstYear);
         switch (agadim[id].year) {
             case 1:
                 agadim[id].fetchCourses(function() {
                      agadim[id].getCourses().forEach(function(course) {
                             if (!(course.id in firstYear)) {
-                                console.log(course.id);
-                                console.log(firstYear);
                                 firstYear[course.id] = course;
                                 $("#year1 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
                             }
