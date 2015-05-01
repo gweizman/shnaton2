@@ -1,1 +1,48 @@
-<div class="row"><a data-id="1" href="#" class="showCourse">קורס גנרי</a></div>
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/timeliner.css">
+		<link rel="stylesheet" href="css/responsive.css">
+	</head>
+	<body>
+		<div id="timelineContainer" class="timelinecontainer">
+			<dl class="timelineMinor">
+				<dt id="general"><a>כללי</a></dt>
+				<dd class="timelineEvent" id="generalEX" style="display: none;">
+					<p>Data</p>
+				</dd>
+			</dl>
+			<dl class="timelineMinor">
+				<dt id="yearA"><a>שנה א'</a></dt>
+				<dd class="timelineEvent" id="aEX" style="display: none;">
+					<p>Data</p>
+				</dd>
+			</dl>
+			<dl class="timelineMinor">
+				<dt id="yearB"><a>שנה ב'</a></dt>
+				<dd class="timelineEvent" id="bEX" style="display: none;">
+					<p>Data</p>
+				</dd>
+			</dl>
+			<dl class="timelineMinor">
+				<dt id="yearC"><a>שנה ג'</a></dt>
+				<dd class="timelineEvent" id="cEX" style="display: none;">
+					<p>Data</p>
+				</dd>
+			</dl>
+		</div>
+		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/timeliner.min.js"></script>
+		<script type="text/javascript" src="js/shnatonApi.js"></script>
+		<script>
+			function drawBasicTimeLine() {
+				
+			}
+			$(document).ready(function() {
+				drawBasicTimeLine();
+			});
+		</script>
+	</body>
+</html>
