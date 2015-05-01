@@ -33,6 +33,7 @@ function loadMainPage() {
 $(function() {
     loadMainPage();
     $("#search-icon").click(function() {
+        loadPage("searchByCourse.html", "");
         $("#search-form").toggle("slide");
     });
 });
