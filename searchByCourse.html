@@ -1,6 +1,6 @@
 <div class="row">
 		<div id="validMaslulim">
-			<span style="border: 3px dashed #ccc; padding: 10px; background: #fff; min-height: 100px">Drag and drop here!</span>
+			<span style="border: 3px dashed #ccc; padding: 10px; background: #fff; min-height: 100px; min-width: 200px;">Drag and drop here</span>
 			<div id="selectedCourses"></div>
 		</div>
 		<div id="searchArea">
@@ -41,7 +41,7 @@
 			$('#validMaslulim').droppable({
 				accept: 'label',
 				drop: function(event, ui) {
-					var item = ui.draggable.draggable('disable').removeAttr('style');
+					var item = ui.draggable.draggable('disable').removeAttr('style').addClass('button');
 					item.appendTo('#selectedCourses');
 					$('<a class="close">&times;</a>').on("click", function(event) {
 						$(this).parent().remove();
@@ -63,6 +63,7 @@
 					for (var i = 0; i < kids.length; i++) {
 						ids[ids.length] = $(kids[i]).attr('id');
 					}
+					ids[ids.length] = null; //add another field, null, just in case.
 				getJSON("Get2Masluls", { "courseId": ids[0], "courseId2": ids[1] }, function(obj) {
 					console.log(obj);
 				});
