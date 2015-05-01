@@ -199,6 +199,8 @@ $(function() {
         $("#courses").show("slide");
     });
     
-    $(".addMaslul").click(updateFaculties);
+    $(".addMaslul").click(function() {
+        updateFaculties();
+    });
     $(document).foundation('accordion', 'reflow');
 });
