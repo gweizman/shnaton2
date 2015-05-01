@@ -44,7 +44,7 @@
 				drop: function(event, ui) {
 					var item = ui.draggable.draggable('disable').removeAttr('style');
 					item.appendTo('#selectedCourses');
-					$('<a href="#" class="close"></a>').on("click", function(event) {
+					$('<a class="close">&times;</a>').on("click", function(event) {
 						$(this).parent().remove();
 					}).prependTo($(item));
 					var kids = $('#selectedCourses').children();
