@@ -11,8 +11,6 @@ function addEgged(agadim, id, callback, firstYear, secondYear, thirdYear) {
     else {
         switch (agadim[id].year) {
             case 1:
-            case '1':
-            default:
                 agadim[id].fetchCourses(function() {
                      agadim[id].getCourses().forEach(function(course) {
                             if (!(course.id in firstYear)) {
@@ -24,7 +22,6 @@ function addEgged(agadim, id, callback, firstYear, secondYear, thirdYear) {
                 });
                 break;
             case 2:
-            case '2':
                 agadim[id].fetchCourses(function() {
                      agadim[id].getCourses().forEach(function(course) {
                          if (!(course.id in secondYear)) {
@@ -36,7 +33,6 @@ function addEgged(agadim, id, callback, firstYear, secondYear, thirdYear) {
                 });
                 break;
             case 3:
-            case '3':
                 agadim[id].fetchCourses(function() {
                      agadim[id].getCourses().forEach(function(course) {
                         if (!(course.id in thirdYear)) {
