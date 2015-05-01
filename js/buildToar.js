@@ -5,60 +5,54 @@ var maslulim = {};
 var chosenMaslulim = [];
 
 function loadCourses() {
-    var firstYear = [], secondYear = [], thirdYear = [];
+    var firstYear = {}, secondYear = {}, thirdYear = {};
     chosenMaslulim.forEach(function(maslul) {
     maslul.fetchAgadim(function() {
+            $("#year1 > table > tbody").html('');
+            $("#year2 > table > tbody").html('');
+            $("#year3 > table > tbody").html('');
             maslul.getAgadim().forEach(function(egged) {
                 switch (egged.year) {
                     case 1:
                     case '1':
                     default:
-                        firstYear.push(egged);
+                        egged.fetchCourses(function() {
+                             egged.getCourses().forEach(function(course) {
+                                if (course.id in firstYear) {
+                                } else {
+                                    firstYear[course.id] = course;
+                                    $("#year1 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
+                                }
+                             });
+                        });
                         break;
                     case 2:
                     case '2':
-                        secondYear.push(egged);
+                        egged.fetchCourses(function() {
+                             egged.getCourses().forEach(function(course) {
+                             if (course.id in secondYear) {
+                             } else {
+                                $("#year2 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
+                                secondYear[course.id] = course;
+                            }
+                             });
+                        });
                         break;
                     case 3:
                     case '3':
-                        thirdYear.push(egged);
+                        egged.fetchCourses(function() {
+                             egged.getCourses().forEach(function(course) {
+                                if (course.id in thirdYear) {
+                             } else {
+                                $("#year2 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
+                                thirdYear[course.id] = course;
+                            }
+                             });
+                        });
                         break;
                 }
             });
 
-            $("#year1 > table > tbody").html('');
-            $("#year2 > table > tbody").html('');
-            $("#year3 > table > tbody").html('');
-            firstYear.forEach(function(egged) {
-                egged.fetchCourses(function() {
-                    egged.getCourses().forEach(function(course) {
-                        $("#year1 > table > tbody").append(
-                            "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
-                        );
-                    });
-                });
-            });
-            
-            secondYear.forEach(function(egged) {
-                egged.fetchCourses(function() {
-                    egged.getCourses().forEach(function(course) {
-                        $("#year2 > table > tbody").append(
-                            "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
-                        );
-                    });
-                });
-            });
-            
-            thirdYear.forEach(function(egged) {
-                egged.fetchCourses(function() {
-                    egged.getCourses().forEach(function(course) {
-                        $("#year3 > table > tbody").append(
-                            "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
-                        );
-                    });
-                });
-            });
-            
             $("#notCourses").hide("slide");
             $("#courses").show("slide");
         });
