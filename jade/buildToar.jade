@@ -7,30 +7,39 @@
 #maslul.center.buttonlist
     select(placeholder="בחר מסלול...")#buttons
     
+#finished.center.buttonlist
+    a.button.disabled(href="#", style="width: 100%") המשך
+    
 #courses.center(style="display:none")
     h2#courses-maslul-chug-faculty
     ul.accordion(data-accordion)#courses-accordion
         li.accordion-navigation
-            a(href="#panel1a") שנה א'
-            #panel1a.content.active
+            a(href="#year1") שנה א'
+            #year1.content.active
                 table(style="width: 100%; text-align: right")
                     thead
                         tr
                             th מספר
                             th שם
                             th נ"ז
-                            th דירוג
                     tbody
+        li.accordion-navigation
+            a(href="#year2") שנה ב'
+            #year2.content
+                table(style="width: 100%; text-align: right")
+                    thead
                         tr
-                            td 1
-                            td קורס
-                            td לא מספיק
-                            td 0
+                            th מספר
+                            th שם
+                            th נ"ז
+                    tbody
         li.accordion-navigation
-            a(href="#panel2a") שנה ב'
-            #panel2a.content
-                | a
-        li.accordion-navigation
-            a(href="#panel3a") שנה ג'
-            #panel3a.content
-                | a
+            a(href="#year3") שנה ג'
+            #year3.content
+                table(style="width: 100%; text-align: right")
+                    thead
+                        tr
+                            th מספר
+                            th שם
+                            th נ"ז
+                    tbody

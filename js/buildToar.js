@@ -2,6 +2,58 @@
 var chugim = {};
 var maslulim = {};
 
+function loadCourses(maslul) {
+    var firstYear = [], secondYear = [], thirdYear = [];
+    maslul.fetchAgadim(function() {
+        maslul.getAgadim().forEach(function(egged) {
+            switch (egged.year) {
+                case 1:
+                default:
+                    firstYear.push(egged);
+                    break;
+                case 2:
+                    secondYear.push(egged);
+                    break;
+                case 3:
+                    thirdYear.push(egged);
+                    break;
+            }
+        });
+    });
+    $("#year1 > table > tbody").html('');
+    $("#year2 > table > tbody").html('');
+    $("#year3 > table > tbody").html('');
+    firstYear.forEach(function(egged) {
+        egged.fetchCourses(function() {
+            egged.getCourses().forEach(function(course) {
+                $("#year1 > table > tbody").append(
+                    "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
+                );
+            });
+        });
+    });
+    
+    secondYear.forEach(function(egged) {
+        egged.fetchCourses(function() {
+            egged.getCourses().forEach(function(course) {
+                $("#year2 > table > tbody").append(
+                    "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
+                );
+            });
+        });
+    });
+    
+    thirdYear.forEach(function(egged) {
+        egged.fetchCourses(function() {
+            egged.getCourses().forEach(function(course) {
+                $("#year3 > table > tbody").append(
+                    "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
+                );
+            });
+        });
+    });
+}
+
 function updateMaslulim(chug) {
     chug.fetchMaslulim(function() {
         $('#maslul > #buttons').data('selectize').clearOptions();
@@ -14,7 +66,9 @@ function updateMaslulim(chug) {
                 }
             );                   
         });
-        $('#maslul > #buttons').data('selectize').enable(); 
+        $(#finished > a).removeClass("disabled").click(function() {
+            loadCourses(
+        });
     });
 }
 
