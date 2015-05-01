@@ -29,7 +29,8 @@
 							var name = obj[i].name;
 							var id = obj[i].id;
 							if ($('#' + id).length == 0) {
-								$('<label id="' + id + '">' + name + '</label>').appendTo($('#searchResults')).hide().draggable({revert: "invalid"});
+								$('<label id="' + id + '" class="button" style="margin: 2px">' +
+									name + '</label>').appendTo($('#searchResults')).hide().draggable({revert: "invalid"});
 								$('#' + id).fadeIn();
 							}
 						}
@@ -41,7 +42,7 @@
 			$('#validMaslulim').droppable({
 				accept: 'label',
 				drop: function(event, ui) {
-					var item = ui.draggable.draggable('disable').removeAttr('style').addClass('button');
+					var item = ui.draggable.draggable('disable').removeAttr('style');
 					item.appendTo('#selectedCourses');
 					$('<a class="close">&times;</a>').on("click", function(event) {
 						$(this).parent().remove();
