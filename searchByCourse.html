@@ -3,7 +3,7 @@
 	padding: 2px 4px;
 	border-radius: 5px;
 	box-shadow: 2px 2px 5px #555;
-	margin: 10px 0 0 0;
+	margin: 5px 0 5px 0;
 }
 </style>
 <div class="row">
@@ -73,7 +73,14 @@
 				}
 				ids[ids.length] = null; //add another field, null, just in case.
 				getJSON("Get2Masluls", { "courseId": ids[0], "courseId2": ids[1] }, function(obj) {
-					console.log(obj);
+					if (obj.length == 0) $('#validMaslulim').html('<h5 class="error">לא נמצאו מסלולים מתאימים.</h5>');
+					else {
+						$('<table id="maslulimTable" style="width: 100%; text-align: right;"></table>').appendTo($('#validMaslulim'));
+						$('<thead><tr><th>Maslul</th><th>Toar</th></tr></thead><tbody id="maslulimTableBody"></tbody>').appendTo($('maslulimTable'));
+						for (var i = 0; i < obj.length; i++) {
+							$('<tr><td>' + obj[i].name + '</td><td>' + obj[i].degreeType + '</td></tr>').appendTo($('#maslulimTableBody'));
+						}
+					}
 				});
 			}
 		});
