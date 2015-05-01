@@ -20,7 +20,9 @@ function updateFaculties() {
     populateFaculties(function(faculties) {
         $('#faculty > #buttons').data('selectize').clearOptions();
          faculties.forEach(function(faculty) {
+            console.log(faculty);
             faculties[faculty.id] = faculty;
+            console.log(faculties);
             $('#faculty > #buttons').data('selectize').addOption(
                 {
                     id: faculty.id,
