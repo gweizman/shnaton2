@@ -55,6 +55,9 @@ function loadCourses(maslul) {
                 });
             });
         });
+        
+        $("#notCourses").hide("slide");
+        $("#courses").show("slide");
     });
 }
 
