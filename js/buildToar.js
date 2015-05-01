@@ -66,9 +66,6 @@ function updateMaslulim(chug) {
                 }
             );                   
         });
-        $(#finished > a).removeClass("disabled").click(function() {
-            loadCourses(
-        });
     });
 }
 
@@ -133,7 +130,12 @@ $(function() {
         create: false,
         valueField: 'id',
         labelField: 'text',
-        searchField: 'text'
+        searchField: 'text',
+        onChange: function(value) {
+                $("#finished > a").removeClass("disabled").click(function() {
+                    loadCourses(maslulim[value]);
+                });
+            }
     });
     $('#maslul > #buttons').data('selectize', $maslulSel[0].selectize);
     $('#maslul > #buttons').data('selectize').disable();
