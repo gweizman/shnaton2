@@ -79,6 +79,8 @@ function updateMaslulim(chug) {
                     }
                 );
             });
+            $('#maslul > #buttons').data('selectize').refreshOptions();
+            $('#maslul > #buttons').data('selectize').enable();
         });
     } else {
         chug.fetchMaslulim(function() {
