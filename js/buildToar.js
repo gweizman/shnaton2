@@ -186,8 +186,7 @@ $(function() {
         searchField: 'text',
         onChange: function(value) {
                 $("#finished > a").removeClass("disabled").click(function() {
-                    console.log(maslulim[value]);
-                    chosenMaslulim.push(maslulim[value]);
+                    chosenMaslulim.push(maslulim[$('#maslul > #buttons').data('selectize').getValue()]);
                     loadCourses();
                 });
             }
