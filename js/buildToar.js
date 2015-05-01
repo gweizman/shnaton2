@@ -6,7 +6,7 @@ var chosenMaslulim = [];
 
 function loadCourses() {
     var firstYear = [], secondYear = [], thirdYear = [];
-    chosenMaslulim.forEach(function(maslul)) {
+    chosenMaslulim.forEach(function(maslul) {
     maslul.fetchAgadim(function() {
             maslul.getAgadim().forEach(function(egged) {
                 console.log(egged);
