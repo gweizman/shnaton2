@@ -9,12 +9,14 @@ function addEgged(agadim, id, callback, firstYear, secondYear, thirdYear) {
         callback();
     }
     else {
-        // console.log(firstYear);
         switch (agadim[id].year) {
             case 1:
+            default:
                 agadim[id].fetchCourses(function() {
                      agadim[id].getCourses().forEach(function(course) {
                             if (!(course.id in firstYear)) {
+                                console.log(firstYear);
+                                console.log(course.id);
                                 firstYear[course.id] = course;
                                 $("#year1 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
                             }
@@ -22,28 +24,28 @@ function addEgged(agadim, id, callback, firstYear, secondYear, thirdYear) {
                     addEgged(agadim, id + 1, callback, firstYear, secondYear, thirdYear);
                 });
                 break;
-            // case 2:
-                // agadim[id].fetchCourses(function() {
-                     // agadim[id].getCourses().forEach(function(course) {
-                         // if (!(course.id in secondYear)) {
-                            // secondYear[course.id] = course;
-                            // $("#year2 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
-                        // }
-                     // });
-                    // addEgged(agadim, id + 1, callback, firstYear, secondYear, thirdYear);
-                // });
-                // break;
-            // case 3:
-                // agadim[id].fetchCourses(function() {
-                     // agadim[id].getCourses().forEach(function(course) {
-                        // if (!(course.id in thirdYear)) {
-                            // thirdYear[course.id] = course;
-                            // $("#year3 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
-                        // }
-                     // });
-                    // addEgged(agadim, id + 1, callback, firstYear, secondYear, thirdYear);
-                // });
-                // break;
+             case 2:
+                 agadim[id].fetchCourses(function() {
+                      agadim[id].getCourses().forEach(function(course) {
+                          if (!(course.id in secondYear)) {
+                            secondYear[course.id] = course;
+                            $("#year2 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
+                        }
+                     });
+                    addEgged(agadim, id + 1, callback, firstYear, secondYear, thirdYear);
+                });
+                break;
+            case 3:
+                agadim[id].fetchCourses(function() {
+                     agadim[id].getCourses().forEach(function(course) {
+                        if (!(course.id in thirdYear)) {
+                            thirdYear[course.id] = course;
+                            $("#year3 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
+                        }
+                     });
+                    addEgged(agadim, id + 1, callback, firstYear, secondYear, thirdYear);
+                });
+                break;
         }
     }
 }
