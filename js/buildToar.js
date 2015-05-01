@@ -19,6 +19,10 @@ function updateFaculties() {
             $("#faculty > #buttons").append('<option data-id="' + faculty.id + '" value="' + faculty.id + '">' + faculty.name + '</option>');
             $("#faculty > #buttons > option[data-id=\"" + faculty.id + "\"]").data("object", faculty);
         });
+        $('#faculty > #buttons').selectize({
+            create: false,
+            sortField: 'text'
+        });
     });
     $("#faculty > #buttons > .button").click(function() {
             updateChugim(this);
