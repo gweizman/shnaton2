@@ -64,9 +64,12 @@ function updateMaslulim(chug) {
                     id: maslul.id,
                     text: maslul.name
                 }
-            );                   
+            );
         });
+        $('#maslul > #buttons').data('selectize').refreshOptions();
+        $('#maslul > #buttons').data('selectize').enable();
     });
+    
 }
 
 function updateChugim(faculty) {
@@ -81,6 +84,7 @@ function updateChugim(faculty) {
                 }
             );                   
         });
+        $('#chug > #buttons').data('selectize').refreshOptions();
         $('#chug > #buttons').data('selectize').enable(); 
     });
 }
