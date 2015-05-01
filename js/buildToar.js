@@ -191,5 +191,7 @@ $(function() {
         $("#maslul").hide("slide");
         $("#courses").show("slide");
     });
+    
+    $(".addMaslul").click(updateFaculties);
     $(document).foundation('accordion', 'reflow');
 });
