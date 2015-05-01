@@ -4,6 +4,53 @@ var maslulim = {};
 
 var chosenMaslulim = [];
 
+function addEgged(agadim, id, callback) {
+    if (agadin.length == id) {
+        callback();
+    }
+    else {
+        switch (agadim[i].year) {
+                    case 1:
+                    case '1':
+                    default:
+                        egged.fetchCourses(function() {
+                             egged.getCourses().forEach(function(course) {
+                                    if !(course.id in firstYear) {
+                                        firstYear[course.id] = course;
+                                        $("#year1 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
+                                    }
+                             });
+                            addEgged(agadim, id + 1, callback);
+                        });
+                        break;
+                    case 2:
+                    case '2':
+                        egged.fetchCourses(function() {
+                             egged.getCourses().forEach(function(course) {
+                                 if !(course.id in secondYear) {
+                                    secondYear[course.id] = course;
+                                    $("#year2 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
+                                }
+                             });
+                            addEgged(agadim, id + 1, callback);
+                        });
+                        break;
+                    case 3:
+                    case '3':
+                        egged.fetchCourses(function() {
+                             egged.getCourses().forEach(function(course) {
+                                if !(course.id in thirdYear) {
+                                    thirdYear[course.id] = course;
+                                    $("#year3 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
+                                }
+                             });
+                            addEgged(agadim, id + 1, callback);
+                        });
+                        break;
+                }
+    }
+}
+
 function loadCourses() {
     var firstYear = {}, secondYear = {}, thirdYear = {};
     chosenMaslulim.forEach(function(maslul) {
@@ -11,50 +58,10 @@ function loadCourses() {
             $("#year1 > table > tbody").html('');
             $("#year2 > table > tbody").html('');
             $("#year3 > table > tbody").html('');
-            maslul.getAgadim().forEach(function(egged) {
-                switch (egged.year) {
-                    case 1:
-                    case '1':
-                    default:
-                        egged.fetchCourses(function() {
-                             egged.getCourses().forEach(function(course) {
-                                if (course.id in firstYear) {
-                                } else {
-                                    firstYear[course.id] = course;
-                                    $("#year1 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
-                                }
-                             });
-                        });
-                        break;
-                    case 2:
-                    case '2':
-                        egged.fetchCourses(function() {
-                             egged.getCourses().forEach(function(course) {
-                             if (course.id in secondYear) {
-                             } else {
-                                $("#year2 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
-                                secondYear[course.id] = course;
-                            }
-                             });
-                        });
-                        break;
-                    case 3:
-                    case '3':
-                        egged.fetchCourses(function() {
-                             egged.getCourses().forEach(function(course) {
-                                if (course.id in thirdYear) {
-                             } else {
-                                $("#year2 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
-                                thirdYear[course.id] = course;
-                            }
-                             });
-                        });
-                        break;
-                }
+            addEgged(maslul.getAgadim(), 0, function() {
+                $("#notCourses").hide("slide");
+                $("#courses").show("slide");
             });
-
-            $("#notCourses").hide("slide");
-            $("#courses").show("slide");
         });
     });
 }
