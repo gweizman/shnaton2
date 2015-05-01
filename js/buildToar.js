@@ -11,7 +11,7 @@ function updateChugim(faculty) {
                 }
             );                   
         });
-        faculty.getChugim.enable(); 
+        $('#chug > #buttons').data('selectize').enable(); 
     });
 }
 
