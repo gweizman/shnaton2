@@ -15,8 +15,6 @@ function addEgged(agadim, id, callback) {
                 agadim[id].fetchCourses(function() {
                      agadim[id].getCourses().forEach(function(course) {
                             if (!(course.id in window.firstYear)) {
-                                console.log(window.firstYear);
-                                console.log(course.id);
                                 window.firstYear[course.id] = course;
                                 $("#year1 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
                             }
@@ -70,11 +68,8 @@ function loadCourses() {
 function updateMaslulim(chug) {
     if (chosenMaslulim.length > 0) {
         chosenMaslulim[0].getSecondPossibleMaslulim(chug.id, function(maslulim) {
-            console.log(maslulim);
             maslulim.forEach(function(maslul) {
-                console.log(maslul.id);
                 window.maslulim[maslul.id] = maslul;
-                console.log(window.maslulim);
                 $('#maslul > #buttons').data('selectize').addOption(
                     {
                         id: maslul.id,
