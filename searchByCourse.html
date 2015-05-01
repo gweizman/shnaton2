@@ -29,7 +29,7 @@
 							var name = obj[i].name;
 							var id = obj[i].id;
 							if ($('#' + id).length == 0) {
-								$('<label id="' + id + '" class="button" style="margin: 2px">' +
+								$('<label id="' + id + '" class="button" style="padding: 2px 4px; border-radius: 5px; box-shadow: 2px 2px 5px #555">' +
 									name + '</label>').appendTo($('#searchResults')).hide().draggable({revert: "invalid"});
 								$('#' + id).fadeIn();
 							}
