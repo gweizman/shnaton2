@@ -6,6 +6,7 @@ function loadCourses(maslul) {
     var firstYear = [], secondYear = [], thirdYear = [];
     maslul.fetchAgadim(function() {
         maslul.getAgadim().forEach(function(egged) {
+            console.log(egged);
             switch (egged.year) {
                 case 1:
                 case '1':
