@@ -8,13 +8,16 @@ function loadCourses(maslul) {
         maslul.getAgadim().forEach(function(egged) {
             switch (egged.year) {
                 case 1:
+                case '1':
                 default:
                     firstYear.push(egged);
                     break;
                 case 2:
+                case '2':
                     secondYear.push(egged);
                     break;
                 case 3:
+                case '3':
                     thirdYear.push(egged);
                     break;
             }
