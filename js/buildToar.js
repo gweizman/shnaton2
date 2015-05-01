@@ -16,7 +16,6 @@ function updateFaculties() {
         console.log(faculties);
         $("#faculty > #buttons").html('');
         faculties.forEach(function(faculty) {
-            alert(faculty);
             $("#faculty > #buttons").append('<option data-id="' + faculty.id + '" value="' + faculty.id + '">' + faculty.name + '</option>');
             $("#faculty > #buttons > option[data-id=\"" + faculty.id + "\"]").data("object", faculty);
         });
