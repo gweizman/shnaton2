@@ -20,6 +20,7 @@ function loadCourses(maslul) {
             }
         });
     });
+    console.log(firstYear);
     $("#year1 > table > tbody").html('');
     $("#year2 > table > tbody").html('');
     $("#year3 > table > tbody").html('');
