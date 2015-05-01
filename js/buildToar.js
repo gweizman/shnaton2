@@ -123,7 +123,7 @@ function updateFaculties() {
     window.maslulim = {};
     $('#faculty > #buttons').data('selectize').clear(true);
     $('#faculty > #buttons').data('selectize').clearOptions();
-    $('#faculty > #buttons').data('selectize').clearclearOptions();
+    $('#faculty > #buttons').data('selectize').refreshOptions();
     
     $('#chug > #buttons').data('selectize').clear(true);
     $('#chug > #buttons').data('selectize').clearOptions();
