@@ -2,81 +2,99 @@
 var chugim = {};
 var maslulim = {};
 
-function loadCourses(maslul) {
+var chosenMaslulim = [];
+
+function loadCourses() {
     var firstYear = [], secondYear = [], thirdYear = [];
+    chosenMaslulim.forEach(function(maslul)) {
     maslul.fetchAgadim(function() {
-        maslul.getAgadim().forEach(function(egged) {
-            console.log(egged);
-            switch (egged.year) {
-                case 1:
-                case '1':
-                default:
-                    firstYear.push(egged);
-                    break;
-                case 2:
-                case '2':
-                    secondYear.push(egged);
-                    break;
-                case 3:
-                case '3':
-                    thirdYear.push(egged);
-                    break;
-            }
-        });
-        $("#year1 > table > tbody").html('');
-        $("#year2 > table > tbody").html('');
-        $("#year3 > table > tbody").html('');
-        firstYear.forEach(function(egged) {
-            egged.fetchCourses(function() {
-                egged.getCourses().forEach(function(course) {
-                    $("#year1 > table > tbody").append(
-                        "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
-                    );
+            maslul.getAgadim().forEach(function(egged) {
+                console.log(egged);
+                switch (egged.year) {
+                    case 1:
+                    case '1':
+                    default:
+                        firstYear.push(egged);
+                        break;
+                    case 2:
+                    case '2':
+                        secondYear.push(egged);
+                        break;
+                    case 3:
+                    case '3':
+                        thirdYear.push(egged);
+                        break;
+                }
+            });
+
+            $("#year1 > table > tbody").html('');
+            $("#year2 > table > tbody").html('');
+            $("#year3 > table > tbody").html('');
+            firstYear.forEach(function(egged) {
+                egged.fetchCourses(function() {
+                    egged.getCourses().forEach(function(course) {
+                        $("#year1 > table > tbody").append(
+                            "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
+                        );
+                    });
                 });
             });
-        });
-        
-        secondYear.forEach(function(egged) {
-            egged.fetchCourses(function() {
-                egged.getCourses().forEach(function(course) {
-                    $("#year2 > table > tbody").append(
-                        "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
-                    );
+            
+            secondYear.forEach(function(egged) {
+                egged.fetchCourses(function() {
+                    egged.getCourses().forEach(function(course) {
+                        $("#year2 > table > tbody").append(
+                            "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
+                        );
+                    });
                 });
             });
-        });
-        
-        thirdYear.forEach(function(egged) {
-            egged.fetchCourses(function() {
-                egged.getCourses().forEach(function(course) {
-                    $("#year3 > table > tbody").append(
-                        "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
-                    );
+            
+            thirdYear.forEach(function(egged) {
+                egged.fetchCourses(function() {
+                    egged.getCourses().forEach(function(course) {
+                        $("#year3 > table > tbody").append(
+                            "<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>"
+                        );
+                    });
                 });
             });
+            
+            $("#notCourses").hide("slide");
+            $("#courses").show("slide");
         });
-        
-        $("#notCourses").hide("slide");
-        $("#courses").show("slide");
     });
 }
 
 function updateMaslulim(chug) {
-    chug.fetchMaslulim(function() {
-        $('#maslul > #buttons').data('selectize').clearOptions();
-        chug.getMaslulim().forEach(function(maslul) {
-            window.maslulim[maslul.id] = maslul;
-            $('#maslul > #buttons').data('selectize').addOption(
-                {
-                    id: maslul.id,
-                    text: maslul.name
-                }
-            );
+    if (chosenMaslulim.length > 0) {
+        chosenMaslulim[0].getSecondPossibleMaslulim(chug.id, function(maslulim) {
+            maslulim.forEach(function(maslul) {
+                window.maslulim[maslul.id] = maslul;
+                $('#maslul > #buttons').data('selectize').addOption(
+                    {
+                        id: maslul.id,
+                        text: maslul.name
+                    }
+                );
+            });
         });
-        $('#maslul > #buttons').data('selectize').refreshOptions();
-        $('#maslul > #buttons').data('selectize').enable();
-    });
-    
+    } else {
+        chug.fetchMaslulim(function() {
+            $('#maslul > #buttons').data('selectize').clearOptions();
+            chug.getMaslulim().forEach(function(maslul) {
+                window.maslulim[maslul.id] = maslul;
+                $('#maslul > #buttons').data('selectize').addOption(
+                    {
+                        id: maslul.id,
+                        text: maslul.name
+                    }
+                );
+            });
+            $('#maslul > #buttons').data('selectize').refreshOptions();
+            $('#maslul > #buttons').data('selectize').enable();
+        });
+    }
 }
 
 function updateChugim(faculty) {
@@ -97,7 +115,13 @@ function updateChugim(faculty) {
 }
 
 function updateFaculties() {
+    $("#finished > a").addClass("disabled").click(function() { });
     window.faculties = {};
+    window.chugim = {};
+    window.maslulim = {};
+    $('#chug > #buttons').data('selectize').disable();
+    $('#maslul > #buttons').data('selectize').disable();
+    $
     populateFaculties(function(faculties) {
         $('#faculty > #buttons').data('selectize').clearOptions();
          faculties.forEach(function(faculty) {
@@ -110,6 +134,8 @@ function updateFaculties() {
             );
             $('#faculty > #buttons').data('selectize').refreshOptions();
         });
+        $("#courses").hide("slide");
+        $("#notCourses").show("slide");
     });
 }
 
@@ -144,7 +170,8 @@ $(function() {
         searchField: 'text',
         onChange: function(value) {
                 $("#finished > a").removeClass("disabled").click(function() {
-                    loadCourses(maslulim[value]);
+                    chosenMaslulim.push(maslulim[value]);
+                    loadCourses();
                 });
             }
     });
