@@ -195,5 +195,5 @@ function Course(id, name, naz, semester, weeklyHours, type, exam, agadim) {
 function getChugByID(id, callback) {
 	getJSON("GetChugByChugId", { "chugId": id }, function(obj) {
 		if (obj.length > 15) callback(new Chug(obj.id, obj.name, new Faculty(obj.hogFaculty.id, obj.hogFaculty.name)));
-	}
+	});
 }
