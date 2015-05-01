@@ -1,7 +1,7 @@
 function updateChugim(faculty) {
     $("#chug-faculty").html($(this).html());
     $(faculty).data("object").fetchChugim(function() {
-        $(faculty.data("object").getChugim().forEach(function(chug) {
+        $(faculty).data("object").getChugim().forEach(function(chug) {
             $("#chug > #buttons").append('<a data-id="' + chug.id + '" class="button">' + chug.name + '</a>');
             $("#chug > #buttons > a[data-id=\"" + chug.id + "\"]").data("object", chug);                   
         });
