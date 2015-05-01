@@ -1,35 +1,56 @@
+﻿var faculties = {};
+
 function updateChugim(faculty) {
-    $("#chug-faculty").html($(this).html());
-    $(faculty).data("object").fetchChugim(function() {
-        $(faculty).data("object").getChugim().forEach(function(chug) {
-            $("#chug > #buttons").append('<a data-id="' + chug.id + '" class="button">' + chug.name + '</a>');
-            $("#chug > #buttons > a[data-id=\"" + chug.id + "\"]").data("object", chug);                   
+    faculty.fetchChugim(function() {
+        $('#chug > #buttons').data('selectize').clearOptions();
+        faculty.getChugim().forEach(function(chug) {
+            $('#chug > #buttons').data('selectize').addOption(
+                {
+                    id: chug.id,
+                    text: chug.name
+                }
+            );                   
         });
-        $("#faculty").hide("slide", function() {
-                $("#chug").show("slide");
-        });
+        faculty.getChugim.enable();
     });
 }
 
 function updateFaculties() {
+    faculties = {};
     populateFaculties(function(faculties) {
-        console.log(faculties);
-        $("#faculty > #buttons").html('');
-        faculties.forEach(function(faculty) {
-            $("#faculty > #buttons").append('<option data-id="' + faculty.id + '" value="' + faculty.id + '">' + faculty.name + '</option>');
-            $("#faculty > #buttons > option[data-id=\"" + faculty.id + "\"]").data("object", faculty);
+        $('#faculty > #buttons').data('selectize').clearOptions();
+         faculties[faculty.id] = faculty;
+         faculties.forEach(function(faculty) {
+            $('#faculty > #buttons').data('selectize').addOption(
+                {
+                    id: faculty.id,
+                    text: faculty.name
+                }
+            );
+            $('#faculty > #buttons').data('selectize').refreshOptions();
         });
-        $('#faculty > #buttons').selectize({
-            create: false,
-            sortField: 'text'
-        });
-    });
-    $("#faculty > #buttons > .button").click(function() {
-            updateChugim(this);
     });
 }
 
 $(function() {
+    $facultySel = $('#faculty > #buttons').selectize({
+        create: false,
+        valueField: 'id',
+        labelField: 'text',
+        searchField: 'text',
+        onChange: function(value) { 
+            updateChugim(faculties[value]);
+        }
+    });
+    $('#faculty > #buttons').data('selectize', $facultySel[0].selectize);
+    $chugSel = $('#chug > #buttons').selectize({
+        create: false,
+        valueField: 'id',
+        labelField: 'text',
+        searchField: 'text'
+    });
+    $('#chug > #buttons').data('selectize', $chugSel[0].selectize);
+    $('#chug > #buttons').data('selectize').disable();
     updateFaculties();
     
     $("#chug > .button").click(function() {
