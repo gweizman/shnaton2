@@ -59,12 +59,7 @@ function Chug(id, name, faculty) {
 		var _this = this;
 		getJSON("GetMaslulimByChug", { "chugId": this.id }, function(obj) {
 			for (var i = 0; i < obj.length; i++) {
-				_this.maslulim[i] = new Maslul(
-					obj[i].id,
-					obj[i].name,
-					obj[i].degreeType,
-					obj[i].type
-				);
+				_this.maslulim[i] = new Maslul(obj[i].id, obj[i].name, obj[i].degreeType, obj[i].type);
 			}
 			callback();
 		});
@@ -88,12 +83,8 @@ function Maslul(id, name, degreeType, type) {
 		var _this = this;
 		getJSON("GetAggadimByMaslul", { "maslulId": this.id }, function(obj) {
 			for (var i = 0; i < obj.length; i++) {
-				_this.agadim[i] = new Eged(
-					obj[i].id,
-					obj[i].yearToar,
-					obj[i].type,
-					obj[i].note //also recieving max/min/exact courses/naz
-				);
+				 //also recieving max/min/exact courses/naz
+				_this.agadim[i] = new Eged(obj[i].id, obj[i].yearToar, obj[i].type, obj[i].note);
 			}
 			callback();
 		});
@@ -106,16 +97,8 @@ function Maslul(id, name, degreeType, type) {
 				if (semester == "קורס שנתי") divisor = 28;
 				else if (semester == "א'" || semester == "ב'") divisor = 14;
 				else divisor = 1; // summer semester
-				_this.courses[i] = new Course(
-					obj[i].id,
-					obj[i].name,
-					obj[i].nz,
-					semester,
-					obj[i].totalHours / divisor,
-					obj[i].type,
-					obj[i].exam,
-					obj[i].aggadim //reparse egged 
-				);
+				_this.courses[i] = new Course(obj[i].id, obj[i].name, obj[i].nz, semester, obj[i].totalHours / divisor,
+					obj[i].type, obj[i].exam, obj[i].aggadim); //no reparse for agadim
 			}
 			callback();
 		});
@@ -126,6 +109,14 @@ function Maslul(id, name, degreeType, type) {
 	this.getDegreeType = function() { return this.degreeType; }
 	this.getCourses = function() { return this.courses; }
 	this.getAgadim = function() { return this.agadim; }
+	this.getSecondPossibleMaslulim = function(chug_id) {
+		getJSON("GetSecondMaslul", { "firstMaslulId": this.id, "chugId": chug_id }, function(obj) {
+			var arr = [];
+			for (var i = 0; i < obj.length; i++) {
+				arr[i] = new Maslul(obj[i].id, obj[i].name, obj[i].degreeType, obj[i].type);
+			}
+		});
+	}
 }
 
 //might need to add naz, courses, etc.
@@ -152,16 +143,8 @@ function Eged(id, year, type, notes) {
 						eged[j] = new Eged(obj.id, obj.yearToar, obj.type, obj.note);
 					});
 				}*/
-				_this.courses[i] = new Course(
-					obj[i].id,
-					obj[i].name,
-					obj[i].nz,
-					semester,
-					obj[i].totalHours / divisor,
-					obj[i].type,
-					obj[i].exam,
-					obj[i].aggadim //no reparsing
-				);
+				_this.courses[i] = new Course(obj[i].id, obj[i].name, obj[i].nz, semester, obj[i].totalHours / divisor,
+					obj[i].type, obj[i].exam, obj[i].aggadim); //no reparsing for aggadim
 			}
 			callback();
 		});
@@ -207,4 +190,10 @@ function Course(id, name, naz, semester, weeklyHours, type, exam, agadim) {
 	this.getCourseLessonType = function() { return this.type; }
 	this.getExamType = function() { return this.type; }
 	this.getAgadim = function() { return this.agadim; }
+}
+
+function getChugByID(id, callback) {
+	getJSON("GetChugByChugId", { "chugId": id }, function(obj) {
+		if (obj.length > 15) callback(new Chug(obj.id, obj.name, new Faculty(obj.hogFaculty.id, obj.hogFaculty.name)));
+	}
 }

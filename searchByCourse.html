@@ -19,67 +19,6 @@
 		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js/shnatonApi.js"></script>
 		<script>
-			//init some bullshit variables
-			
-			//id, name, naz, semester, rating, requirements, mandatory
-			var courses = [];
-			courses[0] = new Course(80131, "חשבון אינפיניטסימלי (1)", 7, 3, null, true);
-			courses[1] = new Course(76901, "פיסיולוגיה של מערכת העצבים ב", 4, 4, null, true);
-			courses[2] = new Course(71976, "שינוי גלובלי - השלכות ביולוגיות ואקולוגיות", 7, 3, null, true);
-			courses[3] = new Course(64125, "פרקים נבחרים בטיפול תרופתי בהפרעות אנדוקריניות", 4, 5, null, true);
-			courses[4] = new Course(53864, "תרבות וחשיבה סוציולוגית : הגרמנים", 4, 4.5, null, true);
-			courses[5] = new Course(18355, "הכל נשאר במשפחה: נשים, ילדים ושאר בני אדם בכתיבה ביידיש (בתרגום עברי)", 4, 1, null, true);
-			
-			//id, year, type, note
-			var agadim = [];
-			agadim[0] = new Eged(1, 1, 1, "");
-			agadim[1] = new Eged(2, 2, 2, "");
-			agadim[2] = new Eged(3, 3, 4, "");
-			
-			agadim[0].courses[0] = courses[0];
-			agadim[0].courses[1] = courses[2];
-			agadim[0].courses[2] = courses[1];
-			agadim[0].courses[3] = courses[5];
-			
-			agadim[1].courses[0] = courses[2];
-			agadim[1].courses[1] = courses[3];
-			agadim[1].courses[2] = courses[0];
-			
-			agadim[2].courses[0] = courses[4];
-			agadim[2].courses[1] = courses[3];
-			
-			//id, name, degreeType, type, rating, years
-			var maslulim = []; 
-			maslulim[0] = new Maslul(1, "some maslul", 1, 1, 3, 3);
-			maslulim[1] = new Maslul(2, "masLOL", 1, 2, 3, 3);
-			maslulim[2] = new Maslul(3, "MASSlul", 1, 7, 3, 3);
-			maslulim[3] = new Maslul(4, "the cake is a lie", 1, 4, 3, 3);
-			maslulim[4] = new Maslul(4, "the cake is a lie", 1, 9, 3, 3);
-			
-			maslulim[0].courses[0] = courses[0];
-			maslulim[0].courses[1] = courses[2];
-			maslulim[0].courses[2] = courses[3];
-			maslulim[0].courses[3] = courses[5];
-			
-			maslulim[1].courses[0] = courses[1];
-			maslulim[1].courses[1] = courses[2];
-			maslulim[1].courses[2] = courses[3];
-			maslulim[1].courses[3] = courses[4];
-			
-			maslulim[2].courses[0] = courses[1];
-			maslulim[2].courses[1] = courses[5];
-			
-			maslulim[3].courses[0] = courses[0];
-			maslulim[3].courses[1] = courses[4];
-			maslulim[3].courses[3] = courses[5];
-			
-			maslulim[4].courses[0] = courses[1];
-			maslulim[4].courses[1] = courses[2];
-			maslulim[4].courses[2] = courses[3];
-			maslulim[4].courses[3] = courses[4];
-			
-		</script>
-		<script>
 		$(document).ready(function() {
 			//add search stuff
 			$('#searchCourse').on("keyup", function(event) {
@@ -91,6 +30,7 @@
 						$(kids[i]).remove();
 					}
 				}
+				// search for matching courses by name
 				if (text.length > 2) {
 					getJSON('GetCourseByName', { 'name': text }, function(obj) {
 						for (var i = 0; i < obj.length; i++) {
@@ -105,6 +45,7 @@
 				}
 			});
 			
+			//filter by selected courses
 			$('#validMaslulim').droppable({
 				accept: 'label',
 				drop: function(event, ui) {
