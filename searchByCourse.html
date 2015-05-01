@@ -47,7 +47,7 @@
 			$('#selectedCourses').droppable({
 				accept: 'label',
 				drop: function(event, ui) {
-					$('#selectedCourses').html('');
+					if ($('#selectedCourses').children().length == 0) $('#selectedCourses').html('');
 					var item = ui.draggable.draggable('disable').removeAttr('style');
 					item.appendTo('#selectedCourses');
 					$('<a class="close">&times;</a>').on("click", function(event) {
