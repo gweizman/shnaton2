@@ -64,25 +64,24 @@
 				if ($('#selectedCourses').children().length > 0) searchMaslulByCourseIds();
 				else $('#selectedCourses').html('גרור קורסים לכאן');
 			});
-			
-			function searchMaslulByCourseIds() {
-				var kids = $('#selectedCourses').children();
-				var ids = [];
-				for (var i = 0; i < kids.length; i++) {
-					ids[ids.length] = $(kids[i]).attr('id');
-				}
-				ids[ids.length] = null; //add another field, null, just in case.
-				getJSON("Get2Masluls", { "courseId": ids[0], "courseId2": ids[1] }, function(obj) {
-					if (obj.length == 0) $('#validMaslulim').html('<h5 class="error">לא נמצאו מסלולים מתאימים.</h5>');
-					else {
-						$('<table id="maslulimTable" style="width: 100%; text-align: right;"></table>').appendTo($('#validMaslulim'));
-						$('<thead><tr><th>Maslul</th><th>Toar</th></tr></thead><tbody id="maslulimTableBody"></tbody>').appendTo($('maslulimTable'));
-						for (var i = 0; i < obj.length; i++) {
-							$('<tr><td>' + obj[i].name + '</td><td>' + obj[i].degreeType + '</td></tr>').appendTo($('#maslulimTableBody'));
-						}
-					}
-				});
-			}
 		});
+		function searchMaslulByCourseIds() {
+			var kids = $('#selectedCourses').children();
+			var ids = [];
+			for (var i = 0; i < kids.length; i++) {
+				ids[ids.length] = $(kids[i]).attr('id');
+			}
+			ids[ids.length] = null; //add another field, null, just in case.
+			getJSON("Get2Masluls", { "courseId": ids[0], "courseId2": ids[1] }, function(obj) {
+				if (obj.length == 0) $('#validMaslulim').html('<h5 class="error">לא נמצאו מסלולים מתאימים.</h5>');
+				else {
+					$('<table id="maslulimTable" style="width: 100%; text-align: right;"></table>').appendTo($('#validMaslulim'));
+					$('<thead><tr><th>Maslul</th><th>Toar</th></tr></thead><tbody id="maslulimTableBody"></tbody>').appendTo($('maslulimTable'));
+					for (var i = 0; i < obj.length; i++) {
+						$('<tr><td>' + obj[i].name + '</td><td>' + obj[i].degreeType + '</td></tr>').appendTo($('#maslulimTableBody'));
+					}
+				}
+			});
+		}
 		</script>
 </div>
