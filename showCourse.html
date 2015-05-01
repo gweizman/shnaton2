@@ -1,1 +1,41 @@
-<div class="row"><h2>שם קורס</h2><ul class="no-bullet"><div class="li"><strong>חוג:</strong></div><div class="li"><strong>סמסטר:</strong></div><div class="li"><strong>סוג:</strong></div><div class="li"><strong>שעות שבועיות:</strong></div><div class="li"><strong>נקודות זכות:</strong></div></ul></div>
+<div class="row">
+	<h2 id="title">שם קורס</h2>
+	<ul class="no-bullet">
+		<div id="chug" class="li">
+			<strong>חוג:</strong>
+		</div>
+		<div id="semester" class="li">
+			<strong>סמסטר:</strong>
+		</div>
+		<div id="lessonType" class="li">
+			<strong>סוג:</strong>
+		</div>
+		<div id="weeklyHours" class="li">
+			<strong>שעות שבועיות:</strong>
+		</div>
+		<div id="naz" class="li">
+			<strong>נקודות זכות:</strong>
+		</div>
+	</ul>
+</div>
+<script>
+	$(document).ready(function() {
+		$.urlParam = function(name){
+			var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+			return results[1] || 0;
+		}
+		var id = $.urlParam('id');
+		getJSON("GetCourseByCourseId", { "courseId": id }, function(obj) {
+			var divisor = 1, semester = obj[i].courseSemester.replace("\u0027", "'");
+			if (semester == "קורס שנתי") divisor = 28;
+			else if (semester == "א'" || semester == "ב'") divisor = 14;
+			$('#naz').append(obj.nz);
+			$('#semester').append(semester);
+			$('#weeklyHours').append(obj.totalHours / divisor);
+			$('#lessonType').append(obj.type);
+			$('#title').html(obj.name + ' (' + obj.id + ')');
+			
+			//{"nz":7,"courseYear":0,"courseSemester":"ב\u0027","totalHours":98,"type":"שעור ותרגיל","exam":"NULL","aggadim":[2454,5835,2292,6540,6579,2492,3148,9042,9093,9025,6101],"id":80133,"name":"חשבון אינפיניטסימלי 2 לתלמידי מדעי המחשב "}
+		});
+	});
+</script>
