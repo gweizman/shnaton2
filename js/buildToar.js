@@ -1,5 +1,4 @@
-﻿global 
-var faculties = {};
+﻿var faculties = {};
 var chugim = {};
 var maslulim = {};
 
