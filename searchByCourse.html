@@ -63,7 +63,7 @@
 					for (var i = 0; i < kids.length; i++) {
 						ids[ids.length] = $(kids[i]).attr('id');
 					}
-				getJSON("GetMaslulsByCourses", ids, function(obj) {
+				getJSON("GetMaslulsByCourses", ids.toJSON(), function(obj) {
 					console.log(obj);
 				});
 			}
