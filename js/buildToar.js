@@ -9,7 +9,7 @@ function addEgged(agadim, id, callback, firstYear, secondYear, thirdYear) {
         callback();
     }
     else {
-        console.log(firstYear);
+        // console.log(firstYear);
         switch (agadim[id].year) {
             case 1:
                 agadim[id].fetchCourses(function() {
