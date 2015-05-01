@@ -18,7 +18,7 @@ function addEgged(agadim, id, callback) {
                                 console.log(window.firstYear);
                                 console.log(course.id);
                                 window.firstYear[course.id] = course;
-                                $("#year1 > table > tbody").append("<tr><td>" + course.id  + "</td><td><a href=\"#\" onclick=\"loadCourse(" + course.id + ")\">" + course.name + "</a></td><td>" + course.naz +"</td></tr>");
+                                $("#year1 > table > tbody").append("<tr><td>" + course.id  + "</td><td>" + course.name + "</td><td>" + course.naz +"</td></tr>");
                             }
                      });
                     addEgged(agadim, id + 1, callback);
